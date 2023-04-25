@@ -64,15 +64,15 @@ axes[-1].set_xticks([0, 5, 10])
 
 axes.append(fig.add_subplot(gs[1, 0]))
 axes[-1].hist(k_ols / true_k, color=fp.colors[0])
-axes[-1].hist((k_ols / true_k).mean(), color=fp.NEARLY_BLACK, zorder=10)
+axes[-1].hist((k_ols / true_k).mean(), color=fp.NEARLY_BLACK, zorder=10, bins=100)
 axes[-1].set_xlabel('$k_{\mathrm{lin}}$ / M$^{-1}$s$^{-1}$')
 axes[-1].set_ylabel('$p(k_{\mathrm{lin}})$ / Ms')
 
 axes.append(fig.add_subplot(gs[1, 1]))
 axes[-1].hist(k_non / true_k, color=fp.colors[1])
-axes[-1].hist((k_non / true_k).mean(), color=fp.NEARLY_BLACK, zorder=10)
+axes[-1].hist((k_non / true_k).mean(), color=fp.NEARLY_BLACK, zorder=10, bins=100)
 axes[-1].set_xlabel('$k_{\mathrm{non}}$ / M$^{-1}$s$^{-1}$')
-axes[-1].set_ylabel('$p(k_{\mathrm{lin}})$ / Ms')
+axes[-1].set_ylabel('$p(k_{\mathrm{non}})$ / Ms')
 
 fig.align_ylabels(axes)
 
