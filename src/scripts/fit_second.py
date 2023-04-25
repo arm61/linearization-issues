@@ -24,7 +24,7 @@ def second_order(t: np.ndarray, A0: float, k: float) -> np.ndarray:
 rng = np.random.default_rng(1)
 
 size = int(2 ** 15)
-scale = 0.05
+scale = 0.04
 t = np.arange(0, 1400, 200)
 true_A0 = 1
 true_k = 3.2e-3
@@ -67,7 +67,7 @@ axes[-1].axvline((k_lin / true_k).mean(), color=fp.colors[0])
 axes[-1].set_xlabel('$k_{\mathrm{lin}} k^{-1}$')
 axes[-1].set_ylabel('$p(k_{\mathrm{lin}} k^{-1})$')
 axes[-1].set_title('Linear fit')
-# axes[-1].set_xticks([1, 2, 3, 4])
+axes[-1].set_xticks([1, 2, 3, 4])
 
 f = open(paths.output / 'lin_bias.txt', 'w')
 f.write(r'\SI{' + f'{k_lin.mean() - true_k:.1e}' + r'}{\meter^3\mole^{-1}\second^{-1}}')
