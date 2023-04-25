@@ -50,21 +50,24 @@ axes = []
 titles = []
 
 axes.append(fig.add_subplot(gs[0, 0]))
-titles.append("Linear plot")
+titles.append("a")
 errorbars = 1 / np.array([A[:, 0] - scale, A[:, 0] + scale])
 axes[-1].errorbar(t / 100, 1 / A[:, 0], np.abs(errorbars - 1 / A[:, 0]), marker='.', color=fp.colors[0])
 axes[-1].set_ylabel('$1/A(t)$')
 axes[-1].set_xlabel('$t$ / $10^2$ s')
 axes[-1].set_xticks([0, 5, 10])
+axes[-1].set_title('Linear plot')
 
 axes.append(fig.add_subplot(gs[0, 1]))
-titles.append("Non-linear plot")
+titles.append("b")
 axes[-1].errorbar(t / 100, A[:, 0], scale, marker='.', color=fp.colors[2])
 axes[-1].set_ylabel('$A(t)$')
 axes[-1].set_xlabel('$t$ / $10^2$ s')
 axes[-1].set_xticks([0, 5, 10])
+axes[-1].set_title('Non-linear plot')
 
 axes.append(fig.add_subplot(gs[1, 0]))
+titles.append("c")
 y, x = np.histogram(k_lin / true_k, bins=100)
 axes[-1].stairs(y / 100, x, color=fp.colors[0], alpha=0.5, fill=True)
 axes[-1].axvline((k_lin / true_k).mean(), color=fp.colors[0])
@@ -72,6 +75,7 @@ axes[-1].set_xlabel('$k_{\mathrm{lin}} k^{-1}$ / M$^{-1}$s$^{-1}$')
 axes[-1].set_ylabel('$p(k_{\mathrm{lin}} k^{-1})$ / $10^{-2}$ Ms')
 
 axes.append(fig.add_subplot(gs[1, 1]))
+titles.append("d")
 y, x = np.histogram(k_non / true_k, bins=100)
 axes[-1].stairs(y / 100, x, color=fp.colors[2], alpha=0.5, fill=True)
 axes[-1].axvline((k_non / true_k).mean(), color=fp.colors[2])
@@ -84,12 +88,12 @@ print((k_lin.mean() - true_k) / (k_non.mean() - true_k))
 
 fig.align_ylabels(axes)
 
-# x_correction = [15, 15] * 2
-for i, ax in enumerate(axes[:2]):
+x_correction = [15, 15, 15, 15]
+for i, ax in enumerate(axes):
     x = ax.get_window_extent().x0# - x_correction[i]
     y = ax.get_window_extent().y1 + 10
     x, y = fig.transFigure.inverted().transform([x, y])
-    fig.text(x, y, titles[i], ha='center')
+    fig.text(x, y, titles[i], ha='left')
 
 # plt.figlegend(loc='upper center', bbox_to_anchor=(0.5, -0.01), ncol=3)
 plt.savefig(paths.figures / "second_order.pdf")
