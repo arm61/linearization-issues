@@ -68,7 +68,8 @@ axes[-1].set_ylabel('$p(k_{\mathrm{lin}} k^{-1})$')
 axes[-1].set_title('Linear fit')
 
 print(k_lin.mean() - true_k)
-print(k_non.mean() - true_k)
+for f in open(paths.output / 'non_bias.txt'):
+    f.write(f'{k_non.mean() - true_k}:.3e')
 print((k_lin.mean() - true_k) / (k_non.mean() - true_k))
 
 fig.align_ylabels(axes)
