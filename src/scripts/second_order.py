@@ -39,8 +39,8 @@ titles = []
 
 axes.append(fig.add_subplot(gs[0, 0]))
 titles.append("Linear plot")
-axes[-1].errorbar(t, 1 / A[:, 0], scale / A[:, 0] ** 2, marker='.', color=fp.colors[0], label='$A$', zorder=10)
-axes[-1].set_ylabel('$A$')
+axes[-1].errorbar(t, 1 / A[:, 1], scale / A[:, 1] ** 2, marker='.', color=fp.colors[0], label='$A$', zorder=10)
+axes[-1].set_ylabel('$1/A(t)$')
 axes[-1].set_xlabel('$t$/s')
 
 fig.align_ylabels(axes)
