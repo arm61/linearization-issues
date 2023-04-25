@@ -49,8 +49,8 @@ Ea_non = np.array([])
 A_non = np.array([])
 for i, j in enumerate(k.T):
     popt, pcov = curve_fit(arrhenius, T, j, sigma=np.ones_like(T) * scale, p0=[50, 4e-3])
-    Ea_non = np.append(Ea_non, popt[0])
-    A_non = np.append(A_non, popt[1])
+    Ea_non = np.append(Ea_non, -popt[0] * R)
+    A_non = np.append(A_non, np.exp(popt[1]))
 
 figsize = figsizes.icml2022_half(nrows=1, ncols=2, height_to_width_ratio=0.8)['figure.figsize']
 fig = plt.figure(figsize=figsize)
