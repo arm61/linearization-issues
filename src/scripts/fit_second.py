@@ -23,7 +23,7 @@ def second_order(t: np.ndarray, A0: float, k: float) -> np.ndarray:
 
 rng = np.random.default_rng(1)
 
-size = int(2 ** 14)
+size = int(2 ** 15)
 scale = 0.04
 t = np.arange(0, 1400, 200)
 true_A0 = 1
@@ -50,22 +50,22 @@ axes = []
 titles = []
 
 axes.append(fig.add_subplot(gs[0, 0]))
-titles.append("ca")
-y, x = np.histogram(k_lin / true_k, bins=100, density=True)
-axes[-1].stairs(y, x, color=fp.colors[0], alpha=0.5, fill=True)
-axes[-1].axvline((k_lin / true_k).mean(), color=fp.colors[0])
-axes[-1].set_xlabel('$k_{\mathrm{lin}} k^{-1}$')
-axes[-1].set_ylabel('$p(k_{\mathrm{lin}} k^{-1})$')
-axes[-1].set_title('Linear fit')
-
-axes.append(fig.add_subplot(gs[0, 1]))
-titles.append("b")
+titles.append("a")
 y, x = np.histogram(k_non / true_k, bins=100, density=True)
 axes[-1].stairs(y, x, color=fp.colors[2], alpha=0.5, fill=True)
 axes[-1].axvline((k_non / true_k).mean(), color=fp.colors[2])
 axes[-1].set_xlabel('$k_{\mathrm{non}} k^{-1}$')
 axes[-1].set_ylabel('$p(k_{\mathrm{non}} k^{-1})$')
 axes[-1].set_title('Non-linear fit')
+
+axes.append(fig.add_subplot(gs[0, 1]))
+titles.append("b")
+y, x = np.histogram(k_lin / true_k, bins=100, density=True)
+axes[-1].stairs(y, x, color=fp.colors[0], alpha=0.5, fill=True)
+axes[-1].axvline((k_lin / true_k).mean(), color=fp.colors[0])
+axes[-1].set_xlabel('$k_{\mathrm{lin}} k^{-1}$')
+axes[-1].set_ylabel('$p(k_{\mathrm{lin}} k^{-1})$')
+axes[-1].set_title('Linear fit')
 
 print(k_lin.mean() - true_k)
 print(k_non.mean() - true_k)
