@@ -31,13 +31,14 @@ true_k = 3.2e-3
 A = rng.normal(loc=second_order(t[:, np.newaxis], true_A0, true_k), scale=scale, size=(t.size, size))
 
 X = np.array([t, np.ones_like(t)]).T
-ols_ = np.matmul(np.matmul(np.linalg.inv(np.matmul(X.T, X)), X.T), 1/A)
-k_ols = ols_[0]
-A0_non = 1 / ols_[1]
+W = np.linalg.inv(np.eye(t.size) * scale)
+wls = np.linalg.inv(X.T @ W @ X) @ X.T @ W @ (1/A)
+k_lin = wls[0]
+A0_lin = 1 / wls[1]
 k_non = np.array([])
 A0_non = np.array([])
 for i, j in enumerate(A.T):
-    popt, pcov = curve_fit(second_order, t, j, p0=[1, 3e-3])
+    popt, pcov = curve_fit(second_order, t, j, sigma=np.ones_like(t) * scale, p0=[1, 3e-3])
     A0_non = np.append(A0_non, popt[0])
     k_non = np.append(k_non, popt[1])
 
@@ -63,9 +64,9 @@ axes[-1].set_xlabel('$t$ / $10^2$ s')
 axes[-1].set_xticks([0, 5, 10])
 
 axes.append(fig.add_subplot(gs[1, 0]))
-y, x = np.histogram(k_ols / true_k, bins=100)
+y, x = np.histogram(k_lin / true_k, bins=100)
 axes[-1].stairs(y / 100, x, color=fp.colors[0], alpha=0.5, fill=True)
-axes[-1].axvline((k_ols / true_k).mean(), color=fp.colors[0], zorder=10)
+axes[-1].axvline((k_lin / true_k).mean(), color=fp.colors[0], zorder=10)
 axes[-1].set_xlabel('$k_{\mathrm{lin}}$ / M$^{-1}$s$^{-1}$')
 axes[-1].set_ylabel('$p(k_{\mathrm{lin}})$ / $10^{-2}$ Ms')
 
@@ -76,7 +77,7 @@ axes[-1].axvline((k_non / true_k).mean(), color=fp.colors[2], zorder=10)
 axes[-1].set_xlabel('$k_{\mathrm{non}}$ / M$^{-1}$s$^{-1}$')
 axes[-1].set_ylabel('$p(k_{\mathrm{non}})$ / $10^{-2}$ Ms')
 
-print(k_ols.mean() - 3.2e-3)
+print(k_lin.mean() - 3.2e-3)
 print(k_non.mean() - 3.2e-3)
 
 fig.align_ylabels(axes)
