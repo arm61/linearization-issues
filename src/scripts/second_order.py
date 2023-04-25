@@ -39,15 +39,17 @@ titles = []
 
 axes.append(fig.add_subplot(gs[0, 0]))
 titles.append("Linear plot")
-axes[-1].errorbar(t, 1 / A[:, 1], scale / A[:, 1] ** 2, marker='.', color=fp.colors[0], label='$A$', zorder=10)
+axes[-1].errorbar(t / 100, 1 / A[:, 1], scale / A[:, 1] ** 2, marker='.', color=fp.colors[0], label='$A$', zorder=10)
 axes[-1].set_ylabel('$1/A(t)$')
-axes[-1].set_xlabel('$t$/s')
+axes[-1].set_xlabel('$t$ / $10^2$ s')
+axes[-1].set_xticks([0, 5, 10])
 
 axes.append(fig.add_subplot(gs[0, 1]))
 titles.append("Non-linear plot")
-axes[-1].errorbar(t, A[:, 1], scale, marker='.', color=fp.colors[1], label='$A$', zorder=10)
+axes[-1].errorbar(t / 100, A[:, 1], scale, marker='.', color=fp.colors[1], label='$A$', zorder=10)
 axes[-1].set_ylabel('$A(t)$')
-axes[-1].set_xlabel('$t$/s')
+axes[-1].set_xlabel('$t$ / $10^2$ s')
+axes[-1].set_xticks([0, 5, 10])
 
 fig.align_ylabels(axes)
 
