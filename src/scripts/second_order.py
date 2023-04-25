@@ -79,7 +79,7 @@ axes[-1].set_ylabel('$p(k_{\mathrm{non}} k_{\mathrm{true}^{-1})$ / $10^{-2}$ Ms'
 
 print(k_lin.mean() - true_k)
 print(k_non.mean() - true_k)
-print(k_lin.mean() - true_k) / (k_non.mean() - true_k))
+print((k_lin.mean() - true_k) / (k_non.mean() - true_k))
 
 fig.align_ylabels(axes)
 
