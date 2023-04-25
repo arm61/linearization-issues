@@ -24,7 +24,7 @@ def second_order(t: np.ndarray, A0: float, k: float) -> np.ndarray:
 rng = np.random.default_rng(1)
 
 size = int(2 ** 15)
-scale = 0.04
+scale = 0.06
 t = np.arange(0, 1400, 200)
 true_A0 = 1
 true_k = 3.2e-3
