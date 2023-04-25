@@ -52,7 +52,7 @@ for i, j in enumerate(k.T):
     Ea_non = np.append(Ea_non, popt[0])
     A_non = np.append(A_non, popt[1])
 
-igsize = figsizes.icml2022_half(nrows=1, ncols=2, height_to_width_ratio=0.8)['figure.figsize']
+figsize = figsizes.icml2022_half(nrows=1, ncols=2, height_to_width_ratio=0.8)['figure.figsize']
 fig = plt.figure(figsize=figsize)
 gs = gridspec.GridSpec(1, 2, figure=fig, wspace=0.4, hspace=0.6)
 
