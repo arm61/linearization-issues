@@ -70,8 +70,8 @@ axes.append(fig.add_subplot(gs[1, 1]))
 titles.append("d")
 y, x = np.histogram(1 / A[3], bins=fp.NBINS, density=True)
 axes[-1].stairs(y, x, color=fp.colors[0], alpha=0.5, fill=True)
-axes[-1].set_xlabel('$A(600$ s$)$')
-axes[-1].set_ylabel('$p[A(600$ s$)]$')
+axes[-1].set_xlabel('$1/A(600$ s$)$')
+axes[-1].set_ylabel('$p[1/A(600$ s$)]$')
 
 fig.align_ylabels(axes)
 
