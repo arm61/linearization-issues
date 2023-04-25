@@ -76,8 +76,8 @@ axes[-1].set_ylabel('$p(k_{\mathrm{lin}})$ / Ms')
 
 fig.align_ylabels(axes)
 
-x_correction = [15, 15, 15, 15] * 2
-for i, ax in enumerate(axes):
+x_correction = [15, 15] * 2
+for i, ax in enumerate(axes[:2]):
     x = ax.get_window_extent().x0 - x_correction[i]
     y = ax.get_window_extent().y1 + 10
     x, y = fig.transFigure.inverted().transform([x, y])
