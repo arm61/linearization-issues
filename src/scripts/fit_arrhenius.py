@@ -79,6 +79,15 @@ axes[-1].set_ylabel('$p(\hat{E}_{\mathrm{a,lin}} E_{\mathrm{a}}^{-1})$')
 axes[-1].set_title('Linear fit')
 # axes[-1].set_xticks([1, 2, 3, 4])
 
+f = open(paths.output / 'lin_bias.txt', 'w')
+f.write(r'\num{' + f'{(Ea_lin.mean() - 1) / Ea:.1e}' + r'}')
+f.close()
+f = open(paths.output / 'non_bias.txt', 'w')
+f.write(r'\SI{' + f'{(Ea_non.mean() - Ea) / Ea:.1e}' + r'}')
+f.close()
+f = open(paths.output / 'bias_ratio.txt', 'w')
+f.write(r'\num{' + f'{(Ea_lin.mean() - Ea) / (Ea_non.mean() - Ea):.1f}' + r'}')
+f.close()
 
 fig.align_ylabels(axes)
 
