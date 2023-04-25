@@ -36,7 +36,7 @@ dependencies:
   src/tex/ms.tex:
     - src/tex/output/lin_bias.txt
     - src/tex/output/non_bias.txt
-    - src/tex/output/bias_raio.txt
+    - src/tex/output/bias_ratio.txt
 
 # Name of the `.tex` manuscript and corresponding `.pdf` article
 ms_name: ms
