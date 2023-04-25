@@ -70,21 +70,7 @@ scripts:
 # Display of the `showyourwork` stamp on first page
 stamp:
   # Show the stamp?
-  enabled: true
-  # Stamp angle in degrees
-  angle: -20.0
-  # Stamp size in inches
-  size: 0.75
-  # Horizontal position in inches from right edge of paper
-  xpos: 0.50
-  # Vertical position in inches from top edge of paper
-  ypos: 0.50
-  # Display of the repo URL in the stamp
-  url:
-    # Show the URL?
-    enabled: true
-    # Maximum URL length to display
-    maxlen: 40
+  enabled: false 
 
 # Enable SyncTeX?
 synctex: True
