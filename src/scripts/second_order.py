@@ -65,16 +65,19 @@ axes[-1].set_xticks([0, 5, 10])
 axes.append(fig.add_subplot(gs[1, 0]))
 y, x = np.histogram(k_ols / true_k, bins=100)
 axes[-1].stairs(y / 100, x, color=fp.colors[0], alpha=0.5)
-axes[-1].axvline((k_ols / true_k).mean(), color=fp.colors[0], zorder=10)
+axes[-1].axvline((k_ols / true_k).mean(), color=fp.colors[0], zorder=10, fill=True)
 axes[-1].set_xlabel('$k_{\mathrm{lin}}$ / M$^{-1}$s$^{-1}$')
 axes[-1].set_ylabel('$p(k_{\mathrm{lin}})$ / $10^{-2}$ Ms')
 
 axes.append(fig.add_subplot(gs[1, 1]))
 y, x = np.histogram(k_non / true_k, bins=100)
 axes[-1].stairs(y / 100, x, color=fp.colors[2], alpha=0.5)
-axes[-1].axvline((k_non / true_k).mean(), color=fp.colors[2], zorder=10)
+axes[-1].axvline((k_non / true_k).mean(), color=fp.colors[2], zorder=10, fill=True)
 axes[-1].set_xlabel('$k_{\mathrm{non}}$ / M$^{-1}$s$^{-1}$')
 axes[-1].set_ylabel('$p(k_{\mathrm{non}})$ / $10^{-2}$ Ms')
+
+print(k_ols.mean() - 3.2e-3)
+print(k_non.mean() - 3.2e-3)
 
 fig.align_ylabels(axes)
 
