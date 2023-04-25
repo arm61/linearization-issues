@@ -3,6 +3,7 @@
 \usepackage{showyourwork}
 \usepackage[version=4]{mhchem}
 \usepackage{graphicx}
+\usepackage{siunitx}
 
 % Begin!
 \begin{document}
@@ -84,25 +85,31 @@ Typically, we aim to quantify the standard deviation of this normal distribution
 
 % An example of a second order rate law fitting failing
 The rate constant can be estimated from the measurement of $A$ at a range of times as the reaction proceeds.
-Then, the common practice, is to plot the linear form of this data (Figure~\ref{fig:second_order}a) and fit a straight line. 
-
+Then, the common practice, is to plot the linear form of this data (Figure~\ref{fig:second_order}b) and fit a straight line. 
+If we were to repeat the measurement of $A(\SI{600}{\second})$ $2^{15}$ times with a random uncertainty, that is constant for all measurements of $0.04$, the normal distribution shown in Fig.~\ref{fig:second_order}c would be observed. 
+Taking the reciprocal of this normal distribution will produce a distribution that is no longer normal (Fig.~\ref{fig:second_order}d). 
 %
 \begin{figure}
   \includegraphics[width=\columnwidth]{figures/second_order.pdf}
-  % \caption{
-    
-  %   }
+  \caption{
+    Plots.
+    }
   \label{fig:second_order}
   \script{second_order.py}
 \end{figure}
 %
 
+Linear regression, ideally weighted~\cite{perrin_linear_2017}, is commonly used to find the gradient and intercept of a linearised relationship. 
+Linear regression makes the assumption that the observations are drawn from normal distributions. 
+Therefore, using the draw from a reciprocal of a normal distribution will lead to biased estimates of the regression parameters.
+Fig.~\ref{fig:fit_second} shows the result of performing non-linear and linear fits to $2^15$ datasets (one of which is shown in Fig.~\ref{fig:second_order}). 
+When the non-linear fitting is performed, the distribution of estimated values of the rate constant is normal with a mean value approximately equal to the true value of $k$ ($E(k) - k = \variable{outputs/non_bias.txt}$
 %
 \begin{figure}
   \includegraphics[width=\columnwidth]{figures/fit_second.pdf}
-  % \caption{
-    
-  %   }
+  \caption{
+    Plits.
+    }
   \label{fig:fit_second}
   \script{fit_second.py}
 \end{figure}
