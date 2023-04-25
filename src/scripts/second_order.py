@@ -90,10 +90,10 @@ fig.align_ylabels(axes)
 
 x_correction = [15, 15, 15, 15]
 for i, ax in enumerate(axes):
-    x = ax.get_window_extent().x0# - x_correction[i]
+    x = ax.get_window_extent().x0 - x_correction[i]
     y = ax.get_window_extent().y1 + 10
     x, y = fig.transFigure.inverted().transform([x, y])
-    fig.text(x, y, titles[i], ha='left')
+    fig.text(x, y, titles[i], ha='left', fontweight='bold')
 
 # plt.figlegend(loc='upper center', bbox_to_anchor=(0.5, -0.01), ncol=3)
 plt.savefig(paths.figures / "second_order.pdf")
