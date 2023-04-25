@@ -1,0 +1,11 @@
+rule fit_second:
+    input: 
+        'src/scripts/fit_second.py',
+        'src/scripts/_fig_params.py'
+    output:
+        'src/tex/figures/fit_second.pdf',
+        'src/tex/output/non_bias.txt'
+    conda:
+        'environment.yml'
+    shell:
+        'cd src/scripts && python fit_second.py'
