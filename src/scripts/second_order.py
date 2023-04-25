@@ -56,6 +56,8 @@ axes[-1].errorbar(t / 100, 1 / A[:, 0], np.abs(errorbars - 1 / A[:, 0]), marker=
 axes[-1].set_ylabel('$1/A(t)$')
 axes[-1].set_xlabel('$t$ / $10^2$ s')
 axes[-1].set_xticks([0, 5, 10])
+axes[-1].set_xlim(0, None)
+axes[-1].set_ylim(0, None)
 axes[-1].set_title('Linear plot')
 
 axes.append(fig.add_subplot(gs[0, 1]))
@@ -64,6 +66,8 @@ axes[-1].errorbar(t / 100, A[:, 0], scale, marker='.', color=fp.colors[2])
 axes[-1].set_ylabel('$A(t)$')
 axes[-1].set_xlabel('$t$ / $10^2$ s')
 axes[-1].set_xticks([0, 5, 10])
+axes[-1].set_xlim(0, None)
+axes[-1].set_ylim(0, None)
 axes[-1].set_title('Non-linear plot')
 
 axes.append(fig.add_subplot(gs[1, 0]))
