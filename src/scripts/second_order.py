@@ -44,7 +44,7 @@ axes[-1].set_ylabel('$1/A(t)$')
 axes[-1].set_xlabel('$t$/s')
 
 axes.append(fig.add_subplot(gs[0, 1]))
-# titles.append("Linear plot")
+titles.append("Non-linear plot")
 axes[-1].errorbar(t, A[:, 1], A[:, 1], marker='.', color=fp.colors[1], label='$A$', zorder=10)
 axes[-1].set_ylabel('$A(t)$')
 axes[-1].set_xlabel('$t$/s')
