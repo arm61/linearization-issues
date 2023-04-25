@@ -47,7 +47,7 @@ Ea_lin = -wls[0] * R
 A_lin = np.exp(wls[1])
 Ea_non = np.array([])
 A_non = np.array([])
-for i, j in enumerate(A.T):
+for i, j in enumerate(k.T):
     popt, pcov = curve_fit(arrhenius, T, j, sigma=np.ones_like(T) * scale, p0=[50, 4e-3])
     Ea_non = np.append(Ea_non, popt[0])
     A_non = np.append(A_non, popt[1])
