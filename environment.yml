@@ -5,3 +5,4 @@ dependencies:
   - pip:
       - matplotlib==3.4.3
       - tueplots==0.0.7
+      - scipy==1.10.1
