@@ -63,14 +63,14 @@ axes[-1].set_xlabel('$t$ / $10^2$ s')
 axes[-1].set_xticks([0, 5, 10])
 
 axes.append(fig.add_subplot(gs[1, 0]))
-axes[-1].hist(k_ols / true_k, color=fp.colors[0], bins=100)
-axes[-1].axvline((k_ols / true_k).mean(), color=fp.NEARLY_BLACK, zorder=10)
+axes[-1].hist(k_ols / true_k, color=fp.colors[0], bins=100, alpha=0.5)
+axes[-1].axvline((k_ols / true_k).mean(), color=fp.colors[0], zorder=10)
 axes[-1].set_xlabel('$k_{\mathrm{lin}}$ / M$^{-1}$s$^{-1}$')
 axes[-1].set_ylabel('$p(k_{\mathrm{lin}})$ / Ms')
 
 axes.append(fig.add_subplot(gs[1, 1]))
-axes[-1].hist(k_non / true_k, color=fp.colors[2], bins=100)
-axes[-1].axvline((k_non / true_k).mean(), color=fp.NEARLY_BLACK, zorder=10)
+axes[-1].hist(k_non / true_k, color=fp.colors[2], bins=100, alpha=0.5)
+axes[-1].axvline((k_non / true_k).mean(), color=fp.colors[2], zorder=10)
 axes[-1].set_xlabel('$k_{\mathrm{non}}$ / M$^{-1}$s$^{-1}$')
 axes[-1].set_ylabel('$p(k_{\mathrm{non}})$ / Ms')
 
