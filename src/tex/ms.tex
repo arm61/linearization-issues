@@ -104,7 +104,7 @@ Linear regression, ideally weighted~\cite{perrin_linear_2017}, is commonly used 
 Linear regression makes the assumption that the observations are drawn from normal distributions. 
 Therefore, using the draw from a reciprocal of a normal distribution will lead to biased estimates of the regression parameters.
 Fig.~\ref{fig:fit_second} shows the result of performing non-linear and linear fits to $2^15$ datasets (one of which is shown in Fig.~\ref{fig:second_order}). 
-% When the non-linear fitting is performed, the distribution of estimated values of the rate constant is normal with a mean value approximately equal to the true value of $k$ (there is a small bias of $E(k) - k = \variable{output/non_bias.txt}$).
+When the non-linear fitting is performed, the distribution of estimated values of the rate constant is normal with a mean value approximately equal to the true value of $k$ (there is a small bias of $E(k) - k$ = \variable{output/non_bias.txt}).
 Whereas, the use of a linear fit approach results in a non-normal distribution, where the difference between the mean and true rate constant, the bias, is \variable{output/lin_bias.txt}, \variable{output/bias_ratio.txt} times larger than for the non-linear approach. 
 Additionally, the distribution has a much broader range.
 Using the linear fitting approach (1) gives a biased estimate of the rate constant and (2) has a higher probability of producing an estimate further from the true value. 
