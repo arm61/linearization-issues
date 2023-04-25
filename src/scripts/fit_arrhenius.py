@@ -42,7 +42,7 @@ while has_zero.size > 0:
 
 X = np.array([T, np.ones_like(T)]).T
 W = np.linalg.inv(np.eye(T.size) * scale)
-wls = np.linalg.inv(X.T @ W @ X) @ X.T @ W @ (1/A)
+wls = np.linalg.inv(X.T @ W @ X) @ X.T @ W @ np.log(k)
 Ea_lin = -wls[0] * R
 A_lin = np.exp(wls[1])
 Ea_non = np.array([])
