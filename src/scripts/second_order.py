@@ -52,7 +52,7 @@ titles = []
 axes.append(fig.add_subplot(gs[0, 0]))
 titles.append("Linear plot")
 errorbars = 1 / np.array([A[:, 0] - scale, A[:, 0] + scale])
-axes[-1].errorbar(t / 100, 1 / A[:, 0], errorbars, marker='.', color=fp.colors[0])
+axes[-1].errorbar(t / 100, 1 / A[:, 0], np.abs(errorbars - 1 / A[:, 0]), marker='.', color=fp.colors[0])
 axes[-1].set_ylabel('$1/A(t)$')
 axes[-1].set_xlabel('$t$ / $10^2$ s')
 axes[-1].set_xticks([0, 5, 10])
