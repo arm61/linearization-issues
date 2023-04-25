@@ -23,7 +23,7 @@ def second_order(t: np.ndarray, A0: float, k: float) -> np.ndarray:
 rng = np.random.default_rng(1)
 
 size = int(2 ** 14)
-scale = 0.05
+scale = 0.02
 t = np.arange(0, 1400, 100)
 true_A0 = 1
 true_k = 3.2e-3
@@ -40,12 +40,8 @@ titles = []
 axes.append(fig.add_subplot(gs[0, 0]))
 titles.append("Linear plot")
 axes[-1].errorbar(t, 1 / A[:, 0], scale / A[:, 0] ** 2, marker='.', color=fp.colors[0], label='$A$', zorder=10)
-# axes[-1].plot(1000 / T_smooth, np.exp(ols.slope / T_smooth + ols.intercept), '-', color=fp.colors[1], label='OLS')
-# axes[-1].plot(1000 / T_smooth, arrhenius(T_smooth, *popt), '-', color=fp.colors[2], label='Non-linear fit')
-# axes[-1].set_yscale('log')
 axes[-1].set_ylabel('$A$')
 axes[-1].set_xlabel('$t$/s')
-axes[-1].set_xticks([1, 1.5, 2])
 
 fig.align_ylabels(axes)
 
