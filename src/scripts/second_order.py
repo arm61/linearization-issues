@@ -51,14 +51,14 @@ titles = []
 
 axes.append(fig.add_subplot(gs[0, 0]))
 titles.append("Linear plot")
-axes[-1].errorbar(t / 100, 1 / A[:, 0], scale / A[:, 0] ** 2, marker='.', color=fp.colors[0], zorder=10)
+axes[-1].errorbar(t / 100, 1 / A[:, 0], scale / A[:, 0] ** 2, marker='.', color=fp.colors[0])
 axes[-1].set_ylabel('$1/A(t)$')
 axes[-1].set_xlabel('$t$ / $10^2$ s')
 axes[-1].set_xticks([0, 5, 10])
 
 axes.append(fig.add_subplot(gs[0, 1]))
 titles.append("Non-linear plot")
-axes[-1].errorbar(t / 100, A[:, 0], scale, marker='.', color=fp.colors[2], zorder=10)
+axes[-1].errorbar(t / 100, A[:, 0], scale, marker='.', color=fp.colors[2])
 axes[-1].set_ylabel('$A(t)$')
 axes[-1].set_xlabel('$t$ / $10^2$ s')
 axes[-1].set_xticks([0, 5, 10])
@@ -83,12 +83,12 @@ print((k_lin.mean() - true_k) / (k_non.mean() - true_k))
 
 fig.align_ylabels(axes)
 
-x_correction = [15, 15] * 2
+# x_correction = [15, 15] * 2
 for i, ax in enumerate(axes[:2]):
-    x = ax.get_window_extent().x0 - x_correction[i]
+    x = ax.get_window_extent().x0# - x_correction[i]
     y = ax.get_window_extent().y1 + 10
     x, y = fig.transFigure.inverted().transform([x, y])
-    fig.text(x, y, titles[i], ha='left')
+    fig.text(x, y, titles[i], ha='center')
 
 # plt.figlegend(loc='upper center', bbox_to_anchor=(0.5, -0.01), ncol=3)
 plt.savefig(paths.figures / "second_order.pdf")
