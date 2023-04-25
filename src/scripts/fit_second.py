@@ -69,7 +69,7 @@ axes[-1].set_title('Linear fit')
 
 print(k_lin.mean() - true_k)
 f = open(paths.output / 'non_bias.txt', 'w')
-f.write(f'{k_non.mean() - true_k}:.3e')
+f.write(r'\SI{' + f'{k_non.mean() - true_k:.3e}' + r'}{\per\second}')
 f.close()
 print((k_lin.mean() - true_k) / (k_non.mean() - true_k))
 
