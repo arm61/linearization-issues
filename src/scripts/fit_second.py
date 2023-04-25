@@ -81,5 +81,5 @@ for i, ax in enumerate(axes):
     fig.text(x, y, titles[i], ha='left', fontweight='bold')
 
 # plt.figlegend(loc='upper center', bbox_to_anchor=(0.5, -0.01), ncol=3)
-plt.savefig(paths.figures / "second_order.pdf")
+plt.savefig(paths.figures / "fit_second.pdf")
 plt.close()
