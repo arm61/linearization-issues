@@ -28,7 +28,7 @@ def first_order(t: np.ndarray, k: float, A0: float) -> np.ndarray:
 T = np.arange(2, 22, 2)
 scale = 0.5
 size = int(2 ** 15)
-k = rng.normal(loc=first_order(T[:, np.newaxis]), scale=scale, size=(T.size, size))
+k = rng.normal(loc=first_order(T[:, np.newaxis], k, 7.5), scale=scale, size=(T.size, size))
 # has_zero = np.where(k < 0)[1]
 # while has_zero.size > 0:
 #     k[:, has_zero] = rng.normal(loc=first_order(T[:, np.newaxis]), scale=scale, size=(T.size, has_zero.size))
