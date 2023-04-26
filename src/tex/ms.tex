@@ -34,114 +34,152 @@
 
 \maketitle 
 
-The ``linearisation'' of non-linear functions is a popular tool in chemical education. 
-This is where a non-linear function, that describes the dependency of a chemical observable on some variable, is turned into a linear one, through some mathematical transformation. 
-This process allows linear regression to be used to quantify the relationship between the dependent and independent variables.
+Non-linear relationships are commonly observed between dependent and independent variables in chemistry.
+``Linearisation'' is a popular approach to quantify such relationships, where some mathematical transformation is used to reduce the non-linear relationship to a linear one. 
+This approach allows linear regression to be used to quantify the relationship. 
+The simplicity of linearisation leads to it featuring in chemistry textbooks \cite{monk_math_2010,atkins_physical_2018} and undergraduate programs.
 
-Linearisation is commonly seen in chemical kinetics courses, as it is useful in determining rate constants and Arrhenius relationships \cite{perrin_linear_2017,hites_calculating_2017}.
-For example, if we consider a second-order integrated rate law,
-%
-\begin{equation}
-    \frac{1}{[\mathrm{A}]_t} = \frac{1}{[\mathrm{A}]_0} + kt,
-\end{equation}
-%
-where, $k$ is the rate constant, $[\mathrm{A}]_t$ is the concentration of reactant \ce{A} at time $t$, and $[\mathrm{A}]_0$ is the initial concentration of \ce{A}. 
-Plotting $1/[\mathrm{A}]_t$ against $t$ linearises this function to give a straight line, the gradient and intercept of which are the rate constant and reciprocal of the initial concentration, respectively. 
-Alternatively, the Arrhenius equation, 
-%
-\begin{equation}
-    k = A\exp{\bigg(-\frac{E_\mathrm{a}}{RT}\bigg)},
-\end{equation}
-%
-is linearised by taking the natural logarithm of both sides to obtain
-%
-\begin{equation}
-    \ln{(k)} = -\frac{E_{\mathrm{a}}}{R}\frac{1}{T} + \ln{(A)},
-    \label{eqn:lin_arrhenius}
-\end{equation}
-%
-where, $E_{\mathrm{a}}$ is the activation energy, $R$ is the ideal gas constant, $T$ is the temperature, $A$ is the pre-exponential factor and, again, $k$ is the rate constant.
-Plotting $\ln{(k)}$ against $1/T$ allows the activation energy to be found as the gradient multiplied by $-R$ and the pre-expoential factor is the exponential of the intercept.
+While mathematically sound, linearisation, as we shall see, leads to biased estimates of parameters when real experimental data are used. 
+Therefore, the use of linearisation should be avoided in formal analysis, however, it is still commonly found in research publications.
+I believe that the reason for this use is the continued inclusion of linearisation in a general chemistry education, despite its problems.
+Non-linear fitting is now accessible through standard analysis software and programming languages, bringing into question if students should be continued to introduced to linearisation. 
 
-In theory, the process of linearisation should have no impact on the resulting values of our ``fitted'' parameters (i.e. the rate constant or activation energy). 
-However in practice, our measurements are not perfect and are only estimates of the true value of the dependent variable.
-These estimates are random draws from some distribution of values for the dependent variable that depends on the measurement method. 
-However, the use of linearisation makes inappropriate assumptions about these data, leading to biased estimates to the fitted parameters. 
-
-% Measurement of concentration by UV-vis and why this will be normally distributed.
-Let us consider, as a representative example, the measurement of the concentration of a chemical reactant, \ce{A}, as a function of time, where \ce{A} is participating in a second-order reaction, i.e. \ce{A + B -> C}. 
-We can measure the concentration of \ce{A} over time by UV-visible spectroscopy, where the absorbance, $A$, of some wavelength of light is proportional to the concentration, following the Beer-Lambert law, such that the second-order integrated rate law becomes
-%
-\begin{equation}
-    \frac{1}{A(t)} = \frac{1}{A(0)} + kt.
-\end{equation}
-%
-
-If we were to repeat the measurement of the absorbance multiple times at a single $t_x$, we would develop a distribution of potential values of $A(t_x)$.
-The shape of this distribution would depend on the sources of uncertainty in the measurement, which can be either systematic or random. 
-We will imagine that we have no systematic uncertainty in our apparatus and therefore all uncertainty is random in nature. 
-It is standard to assume these random uncertainties follow a normal (or Gaussian) distribution. 
-Therefore, any one of our measurements of $A(t_x)$ is a random draw from this normal distribution.
-Typically, we aim to quantify the standard deviation of this normal distribution with our measurement uncertainty, the error bars if we are to plot the data. 
-
-% An example of a second order rate law fitting failing
-The rate constant can be estimated from the measurement of $A$ at a range of times as the reaction proceeds.
-Then, the common practice, is to plot the linear form of this data (Figure~\ref{fig:second_order}b) and fit a straight line. 
-If we were to repeat the measurement of $A(\SI{600}{\second})$ $2^{15}$ times with a random uncertainty, that is constant for all measurements of $0.04$, the normal distribution shown in Fig.~\ref{fig:second_order}c would be observed. 
-Taking the reciprocal of this normal distribution will produce a distribution that is no longer normal (Fig.~\ref{fig:second_order}d). 
+In many cases where linearisation is used, such as first- and second-order reaction rates and vapor pressure as a function of temperature, from the Clausius-Clapeyron equation \cite{perrin_linear_2017,harper_data_2017}, some mathematical transformation is performed on the dependent variable (i.e. the reciprocal or logarithm is taken). 
+The measurement of a dependent variable $y$ is only ever an estimate of the true dependent variable, $\hat{y}$, which is a random draw from a distribution of values, $P(y)$. 
+The shape of this distribution depends on the sources of uncertainty for the measurement, however, it is commonly assumed that random uncertainty sources will lead to a normal distribution defined by a mean and standard deviation, $\mathcal{N}(\mu, \sigma^2)$~\cite{monk_math_2010}.
+The mathematical transformations that facilitate linearisation result in normally distributed variables becoming non-normal.
 %
 \begin{figure}
-  \includegraphics[width=\columnwidth]{figures/second_order.pdf}
+  \includegraphics[width=\columnwidth]{figures/distributions.pdf}
   \caption{
     Plots.
     }
-  \label{fig:second_order}
-  \script{second_order.py}
+  \label{fig:distributions}
+  \script{distributions.py}
 \end{figure}
 %
 
-Linear regression, ideally weighted~\cite{perrin_linear_2017}, is commonly used to find the gradient and intercept of a linearised relationship. 
-Linear regression makes the assumption that the observations are drawn from normal distributions. 
-Therefore, using the draw from a reciprocal of a normal distribution will lead to biased estimates of the regression parameters.
-Fig.~\ref{fig:fit_second} shows the result of performing non-linear and linear fits to $2^15$ datasets (one of which is shown in Fig.~\ref{fig:second_order}). 
-When the non-linear fitting is performed, the distribution of estimated values of the rate constant is normal with a mean value approximately equal to the true value of $k$ (there is a small bias of $E(k) - k$ = \variable{output/non_bias.txt}).
-Whereas, the use of a linear fit approach results in a non-normal distribution, where the difference between the mean and true rate constant, the bias, is \variable{output/lin_bias.txt}, \variable{output/bias_ratio.txt} times larger than for the non-linear approach. 
-Additionally, the distribution has a much broader range.
-Using the linear fitting approach (1) gives a biased estimate of the rate constant and (2) has a higher probability of producing an estimate further from the true value. 
-%
-\begin{figure}
-  \includegraphics[width=\columnwidth]{figures/fit_second.pdf}
-  \caption{
-    Plits.
-    }
-  \label{fig:fit_second}
-  \script{fit_second.py}
-\end{figure}
-%
 
-% An example of a Arrhenius plot fitting failing
-This problem is not limited to the reciprocal relationships, it is also found for the logarithmic relationship found in first order rate laws and Arrhenius relationships. 
-We can consider the Arrhenius behaviour observed for diffusion in a solid state material, where the diffusion coefficient increases as a function of temperature. 
-This relationship is linearised with as discussed above (Eqn.~\ref{eqn:lin_arrhenius}). 
-Again the linear and non-linear analysis was performed for $2^{15}$ datasets, with a true activation energy of \SI{50}{\kilo\joule}, a preexponential factor of \SI{4e-3}{\second^{-1}} and the constant uncertainty was \SI{8e-8}{\second^{-1}} (Fig.~\ref{fig:fit_arrhenius}).
-For this example, the bias is larger and negative when using the linear fitting approach, while again, the non-linear approach produces an unbiased and normally distributed estimate. 
-%
-\begin{figure}
-  \includegraphics[width=\columnwidth]{figures/fit_arrhenius.pdf}
-  \caption{
-    Pluts.
-    }
-  \label{fig:fit_arrhenius}
-  \script{fit_arrhenius.py}
-\end{figure}
-%
 
-It is clear that the process of linearisation has a profound affect on analysis that we perform. 
-The practice of linearisation should be removed from formal analysis, as it introduces biases due to ignoring known assumptions of the linear regression method that is facilitates. 
-There is important historical and pedagogical content behind the use of linearisation. 
-In the classroom or exam hall, it is feasible for a student equipped with graphing paper and a ruler to estimate the gradient of a straight line, while the estimation of a parameters of a non-linear function is less achievable. 
-However, these shortcuts propagate into formal analysis, leading to estimates of parameters from linearisation regularly being found in scholarly work. 
-I question if, with the availabilty of computers that can trivially perform non-linear fitting, the benefits of simplicity outweigh the problems of inaccuracy.
+% In theory, the process of linearisation should have no impact on the resulting values of our ``fitted'' parameters (i.e. the rate constant or activation energy). 
+% However in practice, our measurements are not perfect and are only estimates of the true value of the dependent variable.
+% These estimates are random draws from some distribution of values for the dependent variable that depends on the measurement method. 
+% However, the use of linearisation makes inappropriate assumptions about these data, leading to biased estimates to the fitted parameters. 
+
+
+% If we were to repeat the measurement of the absorbance multiple times at a single $t_x$, we would develop a distribution of potential values of $A(t_x)$.
+% The shape of this distribution would depend on the sources of uncertainty in the measurement, which can be either systematic or random. 
+% We will imagine that we have no systematic uncertainty in our apparatus and therefore all uncertainty is random in nature. 
+% It is standard to assume these random uncertainties follow a normal (or Gaussian) distribution \cite{monk_math_2010}. 
+% Therefore, any one of our measurements of $A(t_x)$ is a random draw from this normal distribution.
+% Typically, we aim to quantify the standard deviation of this normal distribution with our measurement uncertainty, the error bars if we are to plot the data. 
+
+
+% Linearisation is commonly introduced to simplify the determination of reaction rate order, reaction rate temperature dependence, and many other applications \cite{perrin_linear_2017,hites_calculating_2017}.
+% Where the dependent variable is 
+
+
+% Can be useful tool to quickly identify the reaction order by plotting the data. ``Generally, we draw a series of graphs until the choice of axes yields a linear graph''.
+
+% Problem is when the dependent variable is changed.
+
+% The ``linearisation'' of non-linear functions is a popular tool in chemical education. 
+% This is where a non-linear function, that describes the dependency of a chemical observable on some variable, is turned into a linear one, through some mathematical transformation. 
+% This process allows linear regression to be used to quantify the relationship between the dependent and independent variables.
+
+% Linearisation is commonly seen in chemical kinetics courses, as it is useful in determining rate constants and Arrhenius relationships \cite{perrin_linear_2017,hites_calculating_2017}.
+% For example, if we consider a second-order integrated rate law,
+% %
+% \begin{equation}
+%     \frac{1}{[\mathrm{A}]_t} = \frac{1}{[\mathrm{A}]_0} + kt,
+% \end{equation}
+% %
+% where, $k$ is the rate constant, $[\mathrm{A}]_t$ is the concentration of reactant \ce{A} at time $t$, and $[\mathrm{A}]_0$ is the initial concentration of \ce{A}. 
+% Plotting $1/[\mathrm{A}]_t$ against $t$ linearises this function to give a straight line, the gradient and intercept of which are the rate constant and reciprocal of the initial concentration, respectively. 
+% Alternatively, the Arrhenius equation, 
+% %
+% \begin{equation}
+%     k = A\exp{\bigg(-\frac{E_\mathrm{a}}{RT}\bigg)},
+% \end{equation}
+% %
+% is linearised by taking the natural logarithm of both sides to obtain
+% %
+% \begin{equation}
+%     \ln{(k)} = -\frac{E_{\mathrm{a}}}{R}\frac{1}{T} + \ln{(A)},
+%     \label{eqn:lin_arrhenius}
+% \end{equation}
+% %
+% where, $E_{\mathrm{a}}$ is the activation energy, $R$ is the ideal gas constant, $T$ is the temperature, $A$ is the pre-exponential factor and, again, $k$ is the rate constant.
+% Plotting $\ln{(k)}$ against $1/T$ allows the activation energy to be found as the gradient multiplied by $-R$ and the pre-expoential factor is the exponential of the intercept.
+
+% % Measurement of concentration by UV-vis and why this will be normally distributed.
+% Let us consider, as a representative example, the measurement of the concentration of a chemical reactant, \ce{A}, as a function of time, where \ce{A} is participating in a second-order reaction, i.e. \ce{A + B -> C}. 
+% We can measure the concentration of \ce{A} over time by UV-visible spectroscopy, where the absorbance, $A$, of some wavelength of light is proportional to the concentration, following the Beer-Lambert law, such that the second-order integrated rate law becomes
+% %
+% \begin{equation}
+%     \frac{1}{A(t)} = \frac{1}{A(0)} + kt.
+% \end{equation}
+% %
+
+
+% % An example of a second order rate law fitting failing
+% The rate constant can be estimated from the measurement of $A$ at a range of times as the reaction proceeds.
+% Then, the common practice, is to plot the linear form of this data (Figure~\ref{fig:second_order}b) and fit a straight line. 
+% If we were to repeat the measurement of $A(\SI{600}{\second})$ $2^{15}$ times with a random uncertainty, that is constant for all measurements of $0.04$, the normal distribution shown in Fig.~\ref{fig:second_order}c would be observed. 
+% Taking the reciprocal of this normal distribution will produce a distribution that is no longer normal (Fig.~\ref{fig:second_order}d). 
+% %
+% \begin{figure}
+%   \includegraphics[width=\columnwidth]{figures/second_order.pdf}
+%   \caption{
+%     Plots.
+%     }
+%   \label{fig:second_order}
+%   \script{second_order.py}
+% \end{figure}
+% %
+
+% Linear regression, ideally weighted~\cite{perrin_linear_2017}, is commonly used to find the gradient and intercept of a linearised relationship. 
+% Linear regression makes the assumption that the observations are drawn from normal distributions. 
+% Therefore, using the draw from a reciprocal of a normal distribution will lead to biased estimates of the regression parameters.
+% Fig.~\ref{fig:fit_second} shows the result of performing non-linear and linear fits to $2^15$ datasets (one of which is shown in Fig.~\ref{fig:second_order}). 
+% When the non-linear fitting is performed, the distribution of estimated values of the rate constant is normal with a mean value approximately equal to the true value of $k$ (there is a small bias of $E(k) - k$ = \variable{output/non_bias.txt}).
+% Whereas, the use of a linear fit approach results in a non-normal distribution, where the difference between the mean and true rate constant, the bias, is \variable{output/lin_bias.txt}, \variable{output/bias_ratio.txt} times larger than for the non-linear approach. 
+% Additionally, the distribution has a much broader range.
+% Using the linear fitting approach (1) gives a biased estimate of the rate constant and (2) has a higher probability of producing an estimate further from the true value. 
+% %
+% \begin{figure}
+%   \includegraphics[width=\columnwidth]{figures/fit_second.pdf}
+%   \caption{
+%     Plits.
+%     }
+%   \label{fig:fit_second}
+%   \script{fit_second.py}
+% \end{figure}
+% %
+
+% % An example of a Arrhenius plot fitting failing
+% This problem is not limited to the reciprocal relationships, it is also found for the logarithmic relationship found in first order rate laws and Arrhenius relationships. 
+% We can consider the Arrhenius behaviour observed for diffusion in a solid state material, where the diffusion coefficient increases as a function of temperature. 
+% This relationship is linearised with as discussed above (Eqn.~\ref{eqn:lin_arrhenius}). 
+% Again the linear and non-linear analysis was performed for $2^{15}$ datasets, with a true activation energy of \SI{50}{\kilo\joule}, a preexponential factor of \SI{4e-3}{\second^{-1}} and the constant uncertainty was \SI{8e-8}{\second^{-1}} (Fig.~\ref{fig:fit_arrhenius}).
+% For this example, the bias is larger and negative when using the linear fitting approach, while again, the non-linear approach produces an unbiased and normally distributed estimate. 
+% %
+% \begin{figure}
+%   \includegraphics[width=\columnwidth]{figures/fit_arrhenius.pdf}
+%   \caption{
+%     Pluts.
+%     }
+%   \label{fig:fit_arrhenius}
+%   \script{fit_arrhenius.py}
+% \end{figure}
+% %
+
+% It is clear that the process of linearisation has a profound affect on analysis that we perform. 
+% The practice of linearisation should be removed from formal analysis, as it introduces biases due to ignoring known assumptions of the linear regression method that is facilitates. 
+% There is important historical and pedagogical content behind the use of linearisation. 
+% In the classroom or exam hall, it is feasible for a student equipped with graphing paper and a ruler to estimate the gradient of a straight line, while the estimation of a parameters of a non-linear function is less achievable. 
+% However, these shortcuts propagate into formal analysis, leading to estimates of parameters from linearisation regularly being found in scholarly work. 
+% I question if, with the availabilty of computers that can trivially perform non-linear fitting, the benefits of simplicity outweigh the problems of inaccuracy.
 
 
 \bibliography{bib}
