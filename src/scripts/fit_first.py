@@ -9,7 +9,7 @@ import _fig_params as fp
 
 rng = np.random.default_rng(1)
 
-k = 0.1
+k = 0.15
 
 def first_order(t: np.ndarray, k: float) -> np.ndarray:
     """
@@ -26,7 +26,7 @@ def first_order(t: np.ndarray, k: float) -> np.ndarray:
 
 
 t = np.arange(2, 22, 2)
-scale = 0.25
+scale = 0.3
 size = int(2 ** 15)
 At = rng.normal(loc=first_order(t[:, np.newaxis], k), scale=scale, size=(t.size, size))
 has_zero = np.where(At < 0)[1]
