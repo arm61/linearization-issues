@@ -11,7 +11,7 @@ rng = np.random.default_rng(1)
 
 k = 0.1
 
-def first_order(t: np.ndarray, k: float, A0: float) -> np.ndarray:
+def first_order(t: np.ndarray, k: float) -> np.ndarray:
     """
     The first order integrated rate equation.
 
