@@ -46,20 +46,53 @@ Non-linear fitting is now accessible through standard analysis software and prog
 
 In many cases where linearisation is used, such as first- and second-order reaction rates and vapor pressure as a function of temperature, from the Clausius-Clapeyron equation \cite{perrin_linear_2017,harper_data_2017}, some mathematical transformation is performed on the dependent variable (i.e. the reciprocal or logarithm is taken). 
 The measurement of a dependent variable $y$ is only ever an estimate of the true dependent variable, $\hat{y}$, which is a random draw from a distribution of values, $P(y)$. 
-The shape of this distribution depends on the sources of uncertainty for the measurement, however, it is commonly assumed that random uncertainty sources will lead to a normal distribution defined by a mean and standard deviation, $\mathcal{N}(\mu, \sigma^2)$~\cite{monk_math_2010}.
-The mathematical transformations that facilitate linearisation result in normally distributed variables becoming non-normal.
+The shape of this distribution depends on the sources of uncertainty for the measurement, however, it is commonly assumed that random uncertainty sources will lead to a normal distribution defined by a mean and standard deviation, $\mathcal{N}(\mu, \sigma^2)$~\cite{monk_math_2010} (Fig.~\ref{fig:distributions}a).
+The mathematical transformations that facilitate linearisation result in normally distributed variables becoming non-normal (Figs.~\ref{fig:distributions}b \&~\ref{fig:distributions}c).
 %
 \begin{figure}
   \includegraphics[width=\columnwidth]{figures/distributions.pdf}
   \caption{
-    The effect of mathematical transformations on a normal distribution (a) by taking the reciprocal (b) or logarithm (c).
+    The effect of mathematical transformations on a normal distribution, $\mathcal{N}(50, 10^2)$, (a) by taking the reciprocal (b) or logarithm (c).
     }
   \label{fig:distributions}
   \script{distributions.py}
 \end{figure}
 %
 
-The standard deviation of $P(y)$ can often be estimated and should be used in the fitting of linear or non-linear relationships~\cite{perrin_linear_2017}.
+The standard deviation of $P(y)$ can often be estimated, and should be used in the fitting of linear or non-linear relationships, i.e. by using weighted least squares~\cite{harris_nonlinear_1998, perrin_linear_2017}.
+A common assumption of least squares is that the observable is normally distributed, indeed under this assumption the least squares solution is the same as the maximum likelihood solution~\cite{hayashi_econometrics_2001}.
+The approach of performing linear least squares on the linearised form of a non-linear function ignores this assumption, resulting in biased estimates of the fit parameters. 
+
+The problems with linearisation can be shown easily with a simple example. 
+Consider the decomposition of hydrogen peroxide \ce{H2O2} in presence of excess cerium(III) ion (this example has been taken from Ref.~\cite{monk_math_2010}), which follows first-order rate kinetics.
+The first-order integrated rate equation has the form 
+%
+\begin{equation}
+    [\ce{A}]_t = [\ce{A}]_0\exp{(-kt)},
+\end{equation}
+%
+where, $[\ce{A}]_t$ is the concentration of the reactant \ce{A} (hydrogen peroxide) at time $t$, $[\ce{A}]_0$ is the initial concentration and $k$ is the rate constant. 
+The typical approach to linearise this function is to take the natural logarithm of both sides to produce
+%
+\begin{equation}
+    \ln{[\ce{A}]_t} = -kt + \ln{[\ce{A}]_0}.
+\end{equation}
+%
+Taking the natural logarithm of the measured concentration can allow a linear relationship with gradient $-k$ and intercept $\ln{[\ce{A}]_0}$ to be found. 
+
+It is shown in Fig.~\ref{fig:distributions}c that the natural logarithm of a normally distributed variance is not itself normally distributed, ignoring an assumption of linear regression.
+We were to perform repeated measurement of the concentration of hydrogen peroxide as a function of reaction time and analyse each repeat with the linearisation process and non-linear fitting, we will obtain the range of estimates for $k$ shown in Fig.~\ref{fig:fit_first}.
+%
+\begin{figure}
+  \includegraphics[width=\columnwidth]{figures/fit_first.pdf}
+  \caption{
+    Hello World.
+    }
+  \label{fig:fit_first}
+  \script{fit_first.py}
+\end{figure}
+%
+
 
 
 % In theory, the process of linearisation should have no impact on the resulting values of our ``fitted'' parameters (i.e. the rate constant or activation energy). 
