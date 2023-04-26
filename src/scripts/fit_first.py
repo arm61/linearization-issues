@@ -22,29 +22,29 @@ def first_order(t: np.ndarray, k: float, A0: float) -> np.ndarray:
 
     :return: The concentration at time t.
     """
-    return A0 * np.exp(-1 * k  * t)
+    return 7.5 * np.exp(-1 * k  * t)
 
 
 t = np.arange(2, 22, 2)
 scale = 0.25
 size = int(2 ** 15)
-At = rng.normal(loc=first_order(t[:, np.newaxis], k, 7.5), scale=scale, size=(t.size, size))
+At = rng.normal(loc=first_order(t[:, np.newaxis], k), scale=scale, size=(t.size, size))
 has_zero = np.where(At < 0)[1]
 while has_zero.size > 0:
-    At[:, has_zero] = rng.normal(loc=first_order(t[:, np.newaxis], k, 7.5), scale=scale, size=(t.size, has_zero.size))
+    At[:, has_zero] = rng.normal(loc=first_order(t[:, np.newaxis], k), scale=scale, size=(t.size, has_zero.size))
     has_zero = np.where(At <= 0)[1]
 
 X = np.array([t, np.ones_like(t)]).T
 W = np.linalg.inv(np.eye(t.size) * scale)
 wls = np.linalg.inv(X.T @ W @ X) @ X.T @ W @ np.log(At)
 k_lin = -wls[0]
-A0_lin = np.exp(wls[1])
+# A0_lin = np.exp(wls[1])
 k_non = np.array([])
-A0_non = np.array([])
+# A0_non = np.array([])
 for i, j in enumerate(At.T):
-    popt, pcov = curve_fit(first_order, t, j, sigma=np.ones_like(t) * scale, p0=[k, 7])
+    popt, pcov = curve_fit(first_order, t, j, sigma=np.ones_like(t) * scale, p0=[k])
     k_non = np.append(k_non, popt[0])
-    A0_non = np.append(A0_non, popt[1])
+    # A0_non = np.append(A0_non, popt[1])
 
 figsize = figsizes.icml2022_half(nrows=2, ncols=2, height_to_width_ratio=0.8)['figure.figsize']
 fig = plt.figure(figsize=figsize)
