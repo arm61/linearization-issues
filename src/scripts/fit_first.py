@@ -26,7 +26,7 @@ def first_order(t: np.ndarray, k: float, A0: float) -> np.ndarray:
 
 
 t = np.arange(2, 22, 2)
-scale = 0.1
+scale = 0.25
 size = int(2 ** 15)
 At = rng.normal(loc=first_order(t[:, np.newaxis], k, 7.5), scale=scale, size=(t.size, size))
 has_zero = np.where(At < 0)[1]
