@@ -31,7 +31,7 @@ size = int(2 ** 15)
 At = rng.normal(loc=first_order(t[:, np.newaxis], k, 7.5), scale=scale, size=(T.size, size))
 has_zero = np.where(At < 0)[1]
 while has_zero.size > 0:
-    At[:, has_zero] = rng.normal(loc=first_order(t[:, np.newaxis], k, 7.5), scale=scale, size=(T.size, has_zero.size))
+    At[:, has_zero] = rng.normal(loc=first_order(t[:, np.newaxis], k, 7.5), scale=scale, size=(t.size, has_zero.size))
     has_zero = np.where(At <= 0)[1]
 
 X = np.array([t, np.ones_like(t)]).T
