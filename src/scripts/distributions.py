@@ -9,7 +9,7 @@ import _fig_params as fp
 
 rng = np.random.default_rng(1)
 
-distribution = rng.normal(loc=50, scale=5, size=int(2 ** 15))
+distribution = rng.normal(loc=50, scale=10, size=int(2 ** 15))
 
 figsize = figsizes.icml2022_half(nrows=1, ncols=3, height_to_width_ratio=0.8)['figure.figsize']
 fig = plt.figure(figsize=figsize)
