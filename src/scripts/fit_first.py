@@ -46,14 +46,44 @@ for i, j in enumerate(At.T):
     k_non = np.append(k_non, popt[0])
     A0_non = np.append(A0_non, popt[1])
 
-figsize = figsizes.icml2022_half(nrows=1, ncols=2, height_to_width_ratio=0.8)['figure.figsize']
+figsize = figsizes.icml2022_half(nrows=2, ncols=2, height_to_width_ratio=0.8)['figure.figsize']
 fig = plt.figure(figsize=figsize)
-gs = gridspec.GridSpec(1, 2, figure=fig, wspace=0.4, hspace=0.6)
+gs = gridspec.GridSpec(2, 2, figure=fig, wspace=0.4, hspace=0.6)
 
 axes = []
 titles = []
 
 axes.append(fig.add_subplot(gs[0, 0]))
+titles.append("b")
+axes[-1].errorbar(t / 100, At[:, 0], scale, marker='.', color=fp.colors[0])
+axes[-1].set_ylabel('$[\mathrm{H_2O_2}]_t$')
+axes[-1].set_xlabel('$t$ / s')
+axes[-1].set_yscale('log')
+# axes[-1].set_xticks([0, 5, 10])
+axes[-1].set_xlim(0, None)
+axes[-1].set_ylim(0, None)
+axes[-1].set_title('Linear plot')
+
+axes.append(fig.add_subplot(gs[0, 1]))
+titles.append("a")
+axes[-1].errorbar(t, At[:, 0], scale, marker='.', color=fp.colors[2])
+axes[-1].set_ylabel('$[\mathrm{H_2O_2}]_t$')
+axes[-1].set_xlabel('$t$ / s')
+# axes[-1].set_xticks([0, 5, 10])
+axes[-1].set_xlim(0, None)
+axes[-1].set_ylim(0, None)
+axes[-1].set_title('Non-linear plot')
+
+axes.append(fig.add_subplot(gs[1, 0]))
+titles.append("b")
+y, x = np.histogram(k_lin / k, bins=100, density=True)
+axes[-1].stairs(y, x, color=fp.colors[0], alpha=0.5, fill=True)
+axes[-1].axvline((k_lin / k).mean(), color=fp.colors[0])
+axes[-1].set_xlabel('$\hat{k}_{\mathrm{a,lin}} k^{-1}$')
+axes[-1].set_ylabel('$p(\hat{k}_{\mathrm{a,lin}} k^{-1})$')
+# axes[-1].set_xticks([1, 2, 3, 4])
+
+axes.append(fig.add_subplot(gs[1, 1]))
 titles.append("a")
 y, x = np.histogram(k_non / k, bins=100, density=True)
 axes[-1].stairs(y, x, color=fp.colors[2], alpha=0.5, fill=True)
@@ -62,16 +92,6 @@ axes[-1].set_xlabel('$\hat{k}_{\mathrm{non}} k^{-1}$')
 axes[-1].set_ylabel('$p(\hat{k}_{\mathrm{non}} k^{-1})$')
 axes[-1].set_title('Non-linear fit')
 # axes[-1].set_xticks([0.8, 1, 1.2])
-
-axes.append(fig.add_subplot(gs[0, 1]))
-titles.append("b")
-y, x = np.histogram(k_lin / k, bins=100, density=True)
-axes[-1].stairs(y, x, color=fp.colors[0], alpha=0.5, fill=True)
-axes[-1].axvline((k_lin / k).mean(), color=fp.colors[0])
-axes[-1].set_xlabel('$\hat{k}_{\mathrm{a,lin}} k^{-1}$')
-axes[-1].set_ylabel('$p(\hat{k}_{\mathrm{a,lin}} k^{-1})$')
-axes[-1].set_title('Linear fit')
-# axes[-1].set_xticks([1, 2, 3, 4])
 
 # f = open(paths.output / 'lin_bias_ea.txt', 'w')
 # f.write(r'\num{' + f'{(Ea_lin.mean() - Ea) / Ea:.1e}' + r'}')
