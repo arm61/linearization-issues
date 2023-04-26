@@ -26,7 +26,7 @@ def first_order(t: np.ndarray, k: float, A0: float) -> np.ndarray:
 
 
 t = np.arange(2, 22, 2)
-scale = 0.5
+scale = 0.1
 size = int(2 ** 15)
 At = rng.normal(loc=first_order(t[:, np.newaxis], k, 7.5), scale=scale, size=(t.size, size))
 has_zero = np.where(At < 0)[1]
@@ -61,8 +61,7 @@ axes[-1].set_xlabel('$t$ / s')
 axes[-1].set_yscale('log')
 # axes[-1].set_xticks([0, 5, 10])
 axes[-1].set_xlim(0, None)
-axes[-1].set_ylim(0, None)
-axes[-1].set_title('Linear plot')
+axes[-1].set_title('Linearised form')
 
 axes.append(fig.add_subplot(gs[0, 1]))
 titles.append("a")
@@ -72,7 +71,7 @@ axes[-1].set_xlabel('$t$ / s')
 # axes[-1].set_xticks([0, 5, 10])
 axes[-1].set_xlim(0, None)
 axes[-1].set_ylim(0, None)
-axes[-1].set_title('Non-linear plot')
+axes[-1].set_title('Non-linear form')
 
 axes.append(fig.add_subplot(gs[1, 0]))
 titles.append("b")
