@@ -18,89 +18,106 @@
 
 % Abstract with filler text
 \begin{abstract}
-    The linearisation of non-linear functions is commonplace in chemistry textbooks and degree programs. 
-    However, this process can introduce bias into the estimate of parameters of interest. 
-    Here, I give evidence for this bias and suggest the replacement of linearisation in the chemistry curriculum with a robust education in data modelling, including non-linear function optimisation. 
+    The use of mathematical transformation to linearise non-linear functions is commonplace in chemistry textbooks and degree programs. 
+    The use of linearisation can lead to biased estimates of regression parameters, when real measured data is used. 
+    Teaching students to use linearisation leads to researchers applying linearisation in formal analysis; potentially biasing the result of their research. 
+    Therefore, I propose the removal of linearisation and its replacement with robust training in data modelling, including non-linear optimisation.  
 \end{abstract}
 
 \maketitle 
 
-Non-linear relationships are commonly observed between dependent and independent variables in chemistry.
-``Linearisation'' is a popular approach to quantify such relationships, where some mathematical transformation is used to reduce the non-linear relationship to a linear one. 
-This approach allows linear regression to be used to quantify the relationship. 
-The simplicity of linearisation leads to it featuring in chemistry textbooks \cite{monk_math_2010,atkins_physical_2018} and undergraduate programs.
+% Linerisation is a thing that features in chemistry degrees.
+Non-linear relationships are commonly found between dependent and independent variables in chemistry. 
+``Linearisation'' is a popular solution to quantify such relationships, where some mathematical transformation is used to reduce the non-linear problem to a linear one. 
+The relationship can then be quantified using the analytical linear regression, rather than the numerical optimisation required for non-linear fitting. 
+We see this in first- and second-order rate equations, the Clausius-Clapeyron equation, and the Arrhenius relation, to name just a few~\cite{perrin_linear_2017,harper_data_2017,monk_math_2010}.
+The simplicity and utility of linearisation has lead to its appearance in chemistry textbooks~\cite{monk_math_2010,atkins_physical_2018} and undergraduate programs. 
 
-While mathematically sound, linearisation, as we shall see, leads to biased estimates of parameters when real experimental data are used. 
-Therefore, the use of linearisation should be avoided in formal analysis, however, it is still commonly found in research publications.
-I believe that the reason for this use is the continued inclusion of linearisation in general chemistry education, despite its problems.
-Non-linear fitting is now accessible through standard analysis software and programming languages, bringing into question if students should be continued to be introduced to linearisation. 
+% Linearisation appears in research literature cause it is taught in degree programmes. 
+The linearisation process is mathematically sound for noise-free measurements. 
+However, as we shall see, the use of linearisation can lead to biased estimates of the regression parameters; the gradient and intercept of the straight line. 
+Therefore, the use of linearisation should be avoided in formal analysis, however, it is still regularly found in research publications. 
+I believe that the cause of this is the continued inclusion of linearisation in a general chemistry education. 
+Non-linear optimisation is now accessible, through standard analysis software and programming languages, and lacks the pitfalls of linearisation. 
 
-In many cases where linearisation is used, including, but not limited to, first- and second-order reaction rates and vapour pressure as a function of temperature, from the Clausius-Clapeyron equation \cite{perrin_linear_2017,harper_data_2017}, some mathematical transformation is performed on the dependent variable (i.e. the reciprocal or logarithm is taken). 
-The measurement of a dependent variable $y$ is only ever an estimate of the true dependent variable, $\hat{y}$, which is a random draw from a distribution of values, $P(y)$. 
-The shape of this distribution depends on the sources of uncertainty for the measurement, however, it is commonly assumed that random uncertainty sources will lead to a normal distribution defined by a mean and standard deviation, $\mathcal{N}(\mu, \sigma^2)$~\cite{monk_math_2010} (Fig.~\ref{fig:distributions}a).
-The mathematical transformations that facilitate linearisation can result in normally distributed variables becoming non-normal (Figs.~\ref{fig:distributions}b \&~\ref{fig:distributions}c).
+% Linearisation involves the transformation of a normal distribution to something non-normal.
+The measurement of a dependent variable $y$ is only ever an estimate of the true value, $\hat{y}$, which is a random draw from a distribution of values, $P(y)$. 
+The shape of this distribution depends on the noise or uncertainty in the measurement. 
+It is commonly assumed that random uncertainty sources will lead to a normal distribution, $\mathcal{N}(\mu, \sigma^2)$, which is defined by the mean, $\mu$, and standard deviation, $\sigma$~\cite{monk_math_2010} (Fig.~\ref{fig:distributions}).
+In many cases where linearisation is performed, some mathematical transformation is performed on the dependent variable. 
+Where the transformation scales in a non-linear fashion, i.e. the reciprocal or logarithm is taken, will result in the normally distributed variable being non-normal (Figs.~\ref{fig:distributions}b \&~\ref{fig:distributions}c).
 %
 \begin{figure}
   \includegraphics[width=\columnwidth]{figures/distributions.pdf}
   \caption{
-    The effect of mathematical transformations on a normal distribution, $\mathcal{N}(50, 10^2)$, (a) by taking the reciprocal (b) or logarithm (c).
+    Histograms showing the effect of non-linearly scaling mathematical transformations on (a) a normal distribution, $\mathcal{N}(50, 10^2)$, by taking (b) the reciprocal or (c) the logarithm. 
+    Produced from $2^{15}$ random samples from the normal distribution.
     }
   \label{fig:distributions}
   \script{distributions.py}
 \end{figure}
 %
 
-The standard deviation of $P(y)$ can often be estimated, and should be used in the fitting of linear or non-linear relationships, i.e. by using weighted least squares~\cite{harris_nonlinear_1998, perrin_linear_2017}.
-A common assumption of least squares is that the observable is normally distributed, indeed under this assumption, the least squares solution is the same as the maximum likelihood solution~\cite{hayashi_econometrics_2001}.
-The approach of performing linear least squares on the linearised form of a non-linear function ignores this assumption, resulting in biased estimates of the fit parameters. 
+% Least squares/linear regression is unbiased where the dependent variable is normally distributed.
+The standard deviation of $P(y)$ can often be estimated for a given measurement and used to weight measurements based on confidence, as noted by Perrin, this is particularly important in the case of linearised data, where constant uncertainty becomes heteroscedastic~\cite{perrin_linear_2017}.
+For normally distributed variables, weighted linear regression produces unbiased estimates of the gradient and intercept. 
+However, this is not the case when non-normally distributed variables are used and for repeated measurements, there may be a systematic difference between the observed mean of the estimated parameter and its true value.
+This is not the case when non-linear optimisation by least squares is applied to normally distributed variables. 
 
-The problems with linearisation can be shown easily with a simple example. 
-Consider the decomposition of hydrogen peroxide \ce{H2O2} in the presence of excess cerium(III) ion (this example has been taken from Ref.~\cite{monk_math_2010}), which follows first-order rate kinetics.
-The first-order integrated rate equation has the form 
+% Example of linearisation to show problem -- background.
+The problem of bias from the linearised form of a non-linear function can be shown with a simple example. 
+Consider one of the examples from Monk and Munro~\cite{monk_math_2010}, the decomposition of hydrogen peroxide \ce{H2O2} in the presence of excess cerium(III) ion, which follows first-order rate kinetics.
 %
 \begin{equation}
     [\ce{A}]_t = [\ce{A}]_0\exp{(-kt)},
+    \label{eqn:first}
 \end{equation}
 %
-where, $[\ce{A}]_t$ is the concentration of the reactant \ce{A} (hydrogen peroxide) at time $t$, $[\ce{A}]_0$ is the initial concentration and $k$ is the rate constant (shown with representative data in Fig.~\ref{fig:fit_first}a).
-The typical approach to linearise this function is to take the natural logarithm of both sides to produce
+where, $[\ce{A}]_t$ is the concentration of the reactant \ce{A} (hydrogen peroxide) at time $t$, $[\ce{A}]_0$ is the initial concentration and $k$ is the rate constant (shown in the non-linear form with representative data in Fig.~\ref{fig:fit_first}a).
+Linearisation of Eqn.~\ref{eqn:first} involves taking the natural logarithm of both sides to produce
 %
 \begin{equation}
     \ln{[\ce{A}]_t} = -kt + \ln{[\ce{A}]_0}.
 \end{equation}
 %
-Taking the natural logarithm of the measured concentration can allow a linear relationship with gradient $-k$ and intercept $\ln{[\ce{A}]_0}$ to be found (Fig.~\ref{fig:fit_first}b). 
+The gradient and intercept from linear regression are therefore equal to $-k$ and $\ln{[\ce{A}]_0}$, respectively (Fig.~\ref{fig:fit_first}b).
 
-It is shown in Fig.~\ref{fig:distributions}c that the natural logarithm of a normally distributed variance is not itself normally distributed, ignoring an assumption of linear regression.
-Performing repeated measurements of the concentration of hydrogen peroxide as a function of reaction time and analysing each repeat with the linearisation process and non-linear fitting, we will obtain the range of estimates for $k$ shown in Fig.~\ref{fig:fit_first}c \&~\ref{fig:fit_first}d.
-The non-linear form results in a normal distribution of $\hat{k}$ centred on the true rate constant, i.e. the estimation is unbiased. 
-Using the linearised form leads to a biased estimate of $k$, the magnitude of this bias increases with increasing noise, with a broad, non-normal distribution. 
-This arises from the breakdown of the normality assumption present in linear regression when the dependent variable is subjected to a mathematical transformation that scales non-linearly (i.e. a reciprocal or logarithm). 
+% Example of linearisation to show problem -- result.
+The natural logarithm scales non-linearly to produce a non-normally distributed variable (Fig.~\ref{fig:distributions}c).
+This means that if we were to perform repeated measurements (in the case of Fig.~\ref{fig:fit_first}, $2^{15}$ repeats) of the concentration of \ce{H2O2} as a function of reaction time and analyse each repeat with both the linearisation process and non-linear fitting, a range of estimates of $k$ will be obtained (Fig.~\ref{fig:fit_first}c \&~\ref{fig:fit_first}d).
+The non-linear fitting results in a normal distribution of estimated values of $k$, centred on the true rate constant, i.e. the estimation is unbiased. 
+Using the linearised form leads to a biased estimate of $k$, with the magnitude of the bias increasing with increasing noise in the data, and a broad, non-normal distribution of values. 
+This means that, on average, the linearised approach will overestimate the value of $k$. 
 %
 \begin{figure}
   \includegraphics[width=\columnwidth]{figures/fit_first.pdf}
   \caption{
-    The result of using non-linear (a) or linear (b) forms in formal analysis; (c) the normally distributed normalised estimate of $k$ from the non-linear form and (d) the biased log-normal normalised estimate of $k$ form the linear form, the vertical lines indicate the mean of the distribution. 
+    Representative data for first-order integrated rate equation, with a true value of $k=\SI{0.15}{\per\second}$ and $[\ce{A}]_0=\SI{7.5}{\mol\m^{-3}}$ and a constant uncertainty of \SI{0.3}{\mol\m^{-3}}, showing (a) the non-linear and (b) the linearised forms. 
+    The estimate of $k$, normalised to the true value of $k$, from $2^{-15}$ analyses of unique representative datasets, where $[\ce{A}]_0$ was fixed to the true value, using (c) non-linear fitting and (d) linearisation, the vertical lines indicate the mean of the distribution. 
     }
   \label{fig:fit_first}
   \script{fit_first.py}
 \end{figure}
 %
 
-The deficiency of the linearisation process makes it clear that it has no place in formal analysis. 
-Yet, it is still taught regularly to chemistry students, due in part to pedagogical context. 
-In a classroom or exam hall, it is feasible for a student equipped with graphing paper and a ruler to estimate the gradient of a straight line. 
-The estimation of parameters of a non-linear model is less straightforward. 
-However, this bad practice is finding its way into the scholarly record, that we are training students to contribute to. 
-I believe that the linearisation of complex functions should be replaced with adequate training for students to use common analysis software, such as the Python programming language, to optimise non-linear functions. 
+% Linearisation is bad, we should replace it with training in non-linear optimisation. 
+The linearisation process can lead to biased estimates of parameters of interest and therefore has no place in formal analysis. 
+Yet, it is still taught regularly to chemistry students, due in part to the complexity of the more robust non-linear optimisation. 
+In a classroom or exam hall, it is feasible for a student, equipped with graph paper and a ruler to estimate the gradient and intercept of a straight line. 
+However, this bad practice is found regularly in chemical research literature, as students are rarely introduced to the problems of linearisation, because either they are too mathematically complex or those teaching are not aware themselves. 
+
+Recent developments in computing and access to programming with tools, such as the Jupyter Notebook~\cite{kluyver_jupyter_2016} and the Fit-o-mat program~\cite{mglich_open_2018}, mean that non-linear optimisation is more accessible than ever. 
+Therefore, I believe that deficient linearisation of complex functions should be removed from the chemistry curriculum and replaced with training on the use of non-linear optimisation. 
+Such training would represent a valuable skill for chemistry students with an understanding of robust data analysis becoming desirable in both industry and academia. 
+Furthermore, it would lead to a reduction in the use of the flawed linearisation process in the chemical research literature.
 
 \section*{Data availability}
 
-Electronic Supplementary Information (ESI) available: A complete set of analysis/plotting scripts allowing for a fully reproducible and automated analysis workflow, using showyourwork~\cite{luger_showyourwork_2021}, for this work is available at \url{https://github.com/arm61/against-linearisation} (DOI: 10.5281/zenodo.xxxxxxx) under an MIT license, while the text is shared under a CC BY-SA 4.0 license~\cite{mccluskey_github_2023}. \\
+Electronic Supplementary Information (ESI) available: A complete set of analysis/plotting scripts allowing for a fully reproducible and automated analysis workflow, using showyourwork~\cite{luger_showyourwork_2021}, for this work and a Jupyter Notebook showing the use of weighted non-linear optimisation for representative first-order rate kinetics data is available at \url{https://github.com/arm61/against-linearisation} (DOI: 10.5281/zenodo.xxxxxxx) under an MIT license, while the text is shared under a CC BY-SA 4.0 license~\cite{mccluskey_github_2023}. \\
 
 \section*{Acknowledgements}
 
-The author thanks Benjamin J. Morgan, Samuel W. Coles, Thomas Holm Rod, Gabriel Krenzer, and Kasper Tolberg for insightful discussion that started them down the path to this work. 
+The author thanks Benjamin J. Morgan, Samuel W. Coles, Thomas Holm Rod, Gabriel Krenzer, and Kasper Tolberg for the insightful discussion that lead to this work. 
 Additionally, the author would like to thank those that engaged in discussion on Twitter when the problem of linearisation in Arrhenius modelling was commented on. 
 
 \bibliography{bib}
