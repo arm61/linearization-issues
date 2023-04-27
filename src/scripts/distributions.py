@@ -23,7 +23,7 @@ titles.append("a")
 y, x = np.histogram(distribution, bins=fp.NBINS, density=True)
 axes[-1].stairs(y * 1e2, x, color=fp.colors[2], alpha=0.5, fill=True)
 axes[-1].set_xlabel('$y$')
-axes[-1].set_ylabel('$p(y)$ / $10^{-2}$')
+axes[-1].set_ylabel('$P(y)$ / $10^{-2}$')
 axes[-1].set_title('Normal')
 # axes[-1].set_xticks([0.8, 1, 1.2])
 
