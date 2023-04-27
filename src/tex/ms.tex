@@ -42,7 +42,7 @@ Non-linear optimisation is now accessible, through standard analysis software an
 
 % Example of linearization to show problem -- background.
 A simple example can show the bias that linearisation introduces in estimates of regression parameters. 
-Consider the decomposition of hydrogen peroxide \ce{H2O2} in the presence of excess cerium(III) ion, which follows first-order rate kinetics (this example has been taken from Monk and Munro~\cite{monk_math_2010}).
+Consider the decomposition of hydrogen peroxide \ce{H2O2} in the presence of excess cerium(III) ion, which follows first-order rate kinetics (this example has been taken from Monk and Munro~\cite{monk_math_2010})
 %
 \begin{equation}
     [\ce{A}]_t = [\ce{A}]_0\exp{(-kt)},
@@ -68,7 +68,7 @@ This means that, on average, the linearized approach will overestimate the value
   \includegraphics[width=\columnwidth]{figures/fit_first.pdf}
   \caption{
     Representative data for first-order integrated rate equation, with a true value of $k=\SI{0.15}{\per\second}$ and $[\ce{A}]_0=\SI{7.5}{\mol\m^{-3}}$ and a constant uncertainty of \SI{0.3}{\mol\m^{-3}}, showing (a) the non-linear and (b) the linearized forms. 
-    The estimate of $k$, normalised to the true value of $k$, from $2^{-15}$ analyses of unique representative datasets, where $[\ce{A}]_0$ was fixed to the true value, using (c) non-linear fitting and (d) linearization, the vertical lines indicate the mean of the distribution. 
+    The estimate of $k$, normalised to the true value of $k$, from $2^{15}$ analyses of unique representative datasets, where $[\ce{A}]_0$ was fixed to the true value, using (c) non-linear fitting and (d) linearization, the vertical lines indicate the mean of the distribution. 
     }
   \label{fig:fit_first}
   \script{fit_first.py}
