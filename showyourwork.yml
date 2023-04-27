@@ -22,6 +22,9 @@ dag:
   # ignore_files:
   #  - src/tex/orcid-ID.png
 
+margin_icons:
+    monochrome: true
+    horizontal_offset: -4
 
 # Externally-hosted datasets, e.g. on Zenodo
 datasets:
