@@ -102,6 +102,13 @@ f = open(paths.output / 'bias_ratio.txt', 'w')
 f.write(r'\num{' + f'{((k_lin.mean() - k) / k) / ((k_non.mean() - k) / k):.1f}' + r'}')
 f.close()
 
+f = open(paths.output / 'lin_ci.txt', 'w')
+f.write(r'\SIlist{' + f'{np.percentile(k_lin, [2.5, 97.5]):.1e}' + r'}')
+f.close()
+f = open(paths.output / 'non_ci.txt', 'w')
+f.write(r'\SIlist{' + f'{np.percentile(k_non, [2.5, 97.5]):.1e}' + r'}')
+f.close()
+
 fig.align_ylabels(axes)
 
 x_correction = [15, 15, 15, 15]
