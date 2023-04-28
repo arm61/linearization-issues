@@ -18,7 +18,6 @@ def first_order(t: np.ndarray, k: float) -> np.ndarray:
     Args:
         t (:py:attr:`array_like`): The time data.
         k (:py:attr:`float`): The rate constant value.
-        A0 (:py:attr:`float`): The initial reactant concentration value.
 
     :return: The concentration at time t.
     """
