@@ -47,8 +47,10 @@ Full details of the workflow can be determined from the [`Snakefile`](https://gi
 ## Contents
 
 Shown below is a documented directory structure for this repository. 
+For those interested in the Jupyter Notebook that shows the general approach to non-linear optimisation, this can be found at [`src/scripts/weighted-non-linear.ipynb`](https://github.com/arm61/against-linearisation/blob/main/src/scripts/weighted-non-linear.ipynb).
 
 ```
+├── .github/workflows                       # Workflows for builidng the manuscript on Github
 ├── src
 │   ├── scripts
 │   │   ├── .gitignore
