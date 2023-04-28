@@ -27,7 +27,7 @@ I hope to start a discussion in the community as to the place of linearization, 
 <img src="https://img.shields.io/badge/arXiv-xxxx.xxxxx-orange.svg"/>
 </a>
 <br><br>
-<a href="https://orcid.org/0000-0003-3381-5911">Andrew R. McCluskey</a>&ast;, 
+<a href="https://orcid.org/0000-0003-3381-5911">Andrew R. McCluskey</a>&ast;<br>
 &ast;<a href="mailto:andrew.mccluskey@ess.eu">andrew.mccluskey@ess.eu</a>
 </p>
 
