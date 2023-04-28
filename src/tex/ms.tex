@@ -24,7 +24,7 @@
     However, the linearisation procedure can lead to biased estimates of regression parameters, when real measured data is used. 
     Only introducing students to linearization, without discussion of the shortcomings, leads to researchers applying this biased process in formal analysis.
     Modern computing technology means that non-linear optimization is more accessible than ever. 
-    I hope to start a discussion in the community as to the place of linearization, and more broadly the adequacy on data handling skills we currently equip students with.
+    I hope to start a discussion in the community as to the place of linearization, and more broadly the adequacy of the current training in data handling skills we offer to students.
 \end{abstract}
 
 \maketitle 
@@ -34,7 +34,7 @@ Non-linear relationships are commonly found between dependent and independent va
 ``Linearization'' is a popular solution to quantify such relationships, where some mathematical transformation is used to reduce the non-linear problem to a linear one. 
 The relationship can then be quantified using the analytical linear regression, rather than the numerical optimisation required for non-linear fitting. 
 We see this in first- and second-order rate equations, and the Clausius-Clapeyron and Arrhenius equations, to name just a few~\cite{perrin_linear_2017,harper_data_2017,monk_math_2010}.
-The simplicity and utility of linearization has lead to its appearance in chemistry textbooks~\cite{monk_math_2010,atkins_physical_2018} and undergraduate programs. 
+The simplicity and utility of linearization has led to its appearance in chemistry textbooks~\cite{monk_math_2010,atkins_physical_2018} and undergraduate programs. 
 
 % Linearization appears in research literature cause it is taught in degree programmes. 
 The linearization process is mathematically sound for noise-free measurements. 
@@ -44,7 +44,7 @@ This is due to the continued inclusion of linearization in a general chemistry e
 Non-linear optimisation is now accessible, through standard analysis software and programming languages, and lacks the pitfalls of linearization. 
 
 % Example of linearization to show problem -- background.
-A simple example can show the bias that linearisation introduces in estimates of regression parameters. 
+A simple example can show the bias that linearisation introduces in the estimates of regression parameters. 
 Consider the decomposition of hydrogen peroxide \ce{H2O2} in the presence of excess cerium(III) ion, which follows first-order rate kinetics (this example has been taken from Monk and Munro~\cite{monk_math_2010})
 %
 \begin{equation}
@@ -64,7 +64,7 @@ The gradient and intercept from linear regression are therefore equal to $-k$ an
 % Example of linearization to show problem -- result.
 If we are to perform repeated measurements (in the case of Fig.~\ref{fig:fit_first}, $2^{15}$ repeats) of the concentration of \ce{H2O2} as a function of reaction time and analyse each repeat with both the linearization process and non-linear fitting, a range of estimates of $k$ will be obtained from each (Fig.~\ref{fig:fit_first}c \&~\ref{fig:fit_first}d).
 The non-linear fitting results in a normal distribution of estimated values of $k$, with a mean, normalised by true $k$, of \variable{output/non_mean.txt}, i.e. the estimation is unbiased, and a \SI{95}{\percent} confidence interval range of \variable{output/non_ci.txt}.
-Using the linearized form gives a biased estimate of $k$, with a normalised mean of \variable{output/lin_mean.txt}, with the magnitude of the bias increasing with increasing noise in the data.
+Using the linearized form gives a biased estimate of $k$, with a normalised mean of \variable{output/lin_mean.txt}, the magnitude of the bias increases with increasing noise in the data.
 This non-normal distribution is also significantly broader than the non-linear optimisation estimate, with a \SI{95}{\percent} confidence interval range of \variable{output/lin_ci.txt}
 This means that, on average, the linearized approach will overestimate the value of $k$ and estimate a value for $k$ further from the true value. 
 %
@@ -99,7 +99,7 @@ When linearization is used, some mathematical transformation is performed on the
 % Least squares/linear regression is unbiased where the dependent variable is normally distributed.
 The standard deviation of $P(y)$ can often be estimated for a given measurement and used to weight measurements based on confidence, as noted by Perrin, this is particularly important in the case of linearized data, where constant uncertainty becomes heteroscedastic~\cite{perrin_linear_2017}.
 For normally distributed variables, weighted linear regression produces unbiased estimates of the gradient and intercept. 
-However, this is not the case when non-normally distributed variables are used, and for repeated measurements there may be a systematic difference between the observed mean of the estimated parameter and its true value.
+However, this is not the case when non-normally distributed variables are used, and for repeated measurements, there may be a systematic difference between the observed mean of the estimated parameter and its true value.
 This is not the case when non-linear optimization by least squares is applied to normally distributed variables. 
 
 % Linearization is bad, we should replace it with training in non-linear optimisation. 
