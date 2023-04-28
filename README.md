@@ -43,3 +43,29 @@ pip install showyourwork
 showyourwork build 
 ```
 Full details of the workflow can be determined from the [`Snakefile`](https://github.com/arm61/against-linearisation/blob/main/Snakefile) and the [`showyourwork.yml`](https://github.com/arm61/against-linearisation/blob/main/showyourwork.yml).
+
+## Contents
+
+```
+├── src
+│   ├── scripts
+│   │   ├── .gitignore
+│   │   ├── _fig_params.py                  # Custom figure formatting
+│   │   ├── distributions.py                # Script to produce Figure 2
+│   │   ├── fit_first.py                    # Script to produce Figure 1
+│   │   ├── matplotlibrc
+│   │   ├── paths.py                        # Helper file to control paths
+│   │   └── weighted-non-linear.ipynb       # Jupyter Notebook showing weighted non-linear optimization
+│   └── tex
+│   │   ├── figures                         # Figure pdfs are placed here when compiled
+│   │   ├── outputs                         # TeX snippets are placed here when compiled
+│   │   ├── .gitignore
+│   │   ├── LICENCE
+│   │   ├── bib.bib                         # Bibliography
+│   │   ├── ms.tex                          # TeX of the manuscript
+│   │   └── showyourwork.sty                # LaTeX styles for showyourwork
+├── LICENCE
+├── README.md                               # You are here
+├── showyourwork.yml                        # Defines showyourwork structure and options
+└── Snakefile                               # Additional snakemake rules
+```
