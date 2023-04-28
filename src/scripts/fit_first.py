@@ -102,6 +102,13 @@ f = open(paths.output / 'bias_ratio.txt', 'w')
 f.write(r'\num{' + f'{((k_lin.mean() - k) / k) / ((k_non.mean() - k) / k):.1f}' + r'}')
 f.close()
 
+f = open(paths.output / 'lin_mean.txt', 'w')
+f.write(r'\SI{' + f'{np.mean(k_lin / k):.1e}' + r'}')
+f.close()
+f = open(paths.output / 'non_mean.txt', 'w')
+f.write(r'\SI{' + f'{np.mean(k_non / k):.1e}' + r'}')
+f.close()
+
 f = open(paths.output / 'lin_ci.txt', 'w')
 ci_lin = np.percentile(k_lin / k, [2.5, 97.5])
 f.write(r'\SIrange{' + f'{ci_lin[0]:.1e}' + r'}{' + f'{ci_lin[1]:.1e}' + r'}{\per\second}')
