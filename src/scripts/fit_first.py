@@ -101,11 +101,11 @@ f.close()
 
 f = open(paths.output / 'lin_ci.txt', 'w')
 ci_lin = np.percentile(k_lin / k, [2.5, 97.5])
-f.write(r'\numrange{' + f'{ci_lin[0]:.1f}' + r'}{' + f'{ci_lin[1]:.1f}' + r'}')
+f.write(r'\numrange{' + f'{ci_lin[0]:.2f}' + r'}{' + f'{ci_lin[1]:.2f}' + r'}')
 f.close()
 f = open(paths.output / 'non_ci.txt', 'w')
 ci_non = np.percentile(k_non / k, [2.5, 97.5])
-f.write(r'\numrange{' + f'{ci_non[0]:.1f}' + r'}{' + f'{ci_non[1]:.1f}' + r'}')
+f.write(r'\numrange{' + f'{ci_non[0]:.2f}' + r'}{' + f'{ci_non[1]:.2f}' + r'}')
 f.close()
 
 fig.align_ylabels(axes)
