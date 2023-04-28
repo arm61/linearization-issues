@@ -50,28 +50,28 @@ Shown below is a documented directory structure for this repository.
 For those interested in the Jupyter Notebook that shows the general approach to non-linear optimisation, this can be found at [`src/scripts/weighted-non-linear.ipynb`](https://github.com/arm61/against-linearisation/blob/main/src/scripts/weighted-non-linear.ipynb).
 
 ```
-├── .github/workflows                       # Workflows for builidng the manuscript on Github
+├── .github/workflows                  # Workflows for builidng the manuscript on Github
 ├── src
 │   ├── scripts
 │   │   ├── .gitignore
-│   │   ├── _fig_params.py                  # Custom figure formatting
-│   │   ├── distributions.py                # Script to produce Figure 2
-│   │   ├── fit_first.py                    # Script to produce Figure 1
+│   │   ├── _fig_params.py             # Custom figure formatting
+│   │   ├── distributions.py           # Script to produce Figure 2
+│   │   ├── fit_first.py               # Script to produce Figure 1
 │   │   ├── matplotlibrc
-│   │   ├── paths.py                        # Helper file to control paths
-│   │   └── weighted-non-linear.ipynb       # Jupyter Notebook showing weighted non-linear optimization
+│   │   ├── paths.py                   # Helper file to control paths
+│   │   └── weighted-non-linear.ipynb  # Jupyter Notebook showing weighted non-linear optimization
 │   └── tex
-│   │   ├── figures                         # Figure pdfs are placed here when compiled
-│   │   ├── outputs                         # TeX snippets are placed here when compiled
+│   │   ├── figures                    # Figure pdfs are placed here when compiled
+│   │   ├── outputs                    # TeX snippets are placed here when compiled
 │   │   ├── .gitignore
 │   │   ├── LICENCE
-│   │   ├── bib.bib                         # Bibliography
-│   │   ├── ms.tex                          # TeX of the manuscript
-│   │   └── showyourwork.sty                # LaTeX styles for showyourwork
+│   │   ├── bib.bib                    # Bibliography
+│   │   ├── ms.tex                     # TeX of the manuscript
+│   │   └── showyourwork.sty           # LaTeX styles for showyourwork
 ├── .gitignore
 ├── LICENCE
-├── README.md                               # You are here
-├── Snakefile                               # Additional snakemake rules
-├── environment.yml                         # conda/mamba environment file
-└── showyourwork.yml                        # Defines showyourwork structure and options
+├── README.md                          # You are here
+├── Snakefile                          # Additional snakemake rules
+├── environment.yml                    # conda/mamba environment file
+└── showyourwork.yml                   # Defines showyourwork structure and options
 ```
