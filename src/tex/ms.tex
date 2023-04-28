@@ -1,11 +1,10 @@
 % Define document class
-\documentclass[journal=jacsat,manuscript=article]{achemso}
+\documentclass[journal=jceda8,manuscript=article]{achemso}
 \usepackage{showyourwork}
 \usepackage[version=4]{mhchem}
 \usepackage{graphicx}
 \usepackage{siunitx}
-\sisetup{range-units = bracket,
-         range-exponents = combine-bracket}
+\sisetup{range-exponents = combine-bracket}
 
 % Author list
 \author{Andrew R. McCluskey}
@@ -48,15 +47,15 @@ A simple example can show the bias that linearisation introduces in the estimate
 Consider the decomposition of hydrogen peroxide \ce{H2O2} in the presence of excess cerium(III) ion, which follows first-order rate kinetics (this example has been taken from Monk and Munro~\cite{monk_math_2010})
 %
 \begin{equation}
-    [\ce{A}]_t = [\ce{A}]_0\exp{(-kt)},
+    [\ce{H2O2}]_t = [\ce{H2O2}]_0\exp{(-kt)},
     \label{eqn:first}
 \end{equation}
 %
-where, $[\ce{A}]_t$ is the concentration of the reactant \ce{A} (hydrogen peroxide) at time $t$, $[\ce{A}]_0$ is the initial concentration and $k$ is the rate constant (shown in the non-linear form with representative data in Fig.~\ref{fig:fit_first}a).
+where, $[\ce{H2O2}]_t$ is the concentration of hydrogen peroxide at time $t$, $[\ce{H2O2}]_0$ is the initial concentration and $k$ is the rate constant (shown in the non-linear form with representative data in Fig.~\ref{fig:fit_first}a).
 Linearization of Eqn.~\ref{eqn:first} involves taking the natural logarithm of both sides to produce
 %
 \begin{equation}
-    \ln{[\ce{A}]_t} = -kt + \ln{[\ce{A}]_0}.
+    \ln{[\ce{H2O2}]_t} = -kt + \ln{[\ce{H2O2}]_0}.
 \end{equation}
 %
 The gradient and intercept from linear regression are therefore equal to $-k$ and $\ln{[\ce{A}]_0}$, respectively (Fig.~\ref{fig:fit_first}b).
