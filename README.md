@@ -46,6 +46,8 @@ Full details of the workflow can be determined from the [`Snakefile`](https://gi
 
 ## Contents
 
+Shown below is a documented directory structure for this repository. 
+
 ```
 ├── src
 │   ├── scripts
@@ -64,8 +66,10 @@ Full details of the workflow can be determined from the [`Snakefile`](https://gi
 │   │   ├── bib.bib                         # Bibliography
 │   │   ├── ms.tex                          # TeX of the manuscript
 │   │   └── showyourwork.sty                # LaTeX styles for showyourwork
+├── .gitignore
 ├── LICENCE
 ├── README.md                               # You are here
-├── showyourwork.yml                        # Defines showyourwork structure and options
-└── Snakefile                               # Additional snakemake rules
+├── Snakefile                               # Additional snakemake rules
+├── environment.yml                         # conda/mamba environment file
+└── showyourwork.yml                        # Defines showyourwork structure and options
 ```
