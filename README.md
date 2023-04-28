@@ -24,7 +24,7 @@ I hope to start a discussion in the community as to the place of linearization, 
 <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.xxxxxxx.svg"/>
 </a>
 <a href="https://arxiv.org/abs/xxxx.xxxxx">
-<img src="https://img.shields.io/badge/arXiv-xxxx.xxxxx-orange.svg"/>
+<img src="https://img.shields.io/badge/ChemRxiv-xxxx.xxxxx-orange.svg"/>
 </a>
 <br><br>
 <a href="https://orcid.org/0000-0003-3381-5911">Andrew R. McCluskey</a>&ast;<br>
