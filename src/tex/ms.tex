@@ -63,7 +63,10 @@ The gradient and intercept from linear regression are therefore equal to $-k$ an
 
 % Example of linearization to show problem -- result.
 If we are to perform repeated measurements (in the case of Fig.~\ref{fig:fit_first}, $2^{15}$ repeats) of the concentration of \ce{H2O2} as a function of reaction time and analyse each repeat with both the linearization process and non-linear fitting, a range of estimates of $k$ will be obtained from each (Fig.~\ref{fig:fit_first}c \&~\ref{fig:fit_first}d).
-The non-linear fitting results in a normal distribution of estimated values of $k$, centred on the true rate constant, i.e. the estimation is unbiased. 
+The non-linear fitting results in a normal distribution of estimated values of $k$, with a mean, normalised by true $k$ of \variable{output/non_mean.txt}.
+
+
+centred on the true rate constant, i.e. the estimation is unbiased. 
 Using the linearized form gives a biased estimate of $k$ (note that the distribution mean is not at \num{1}), with the magnitude of the bias increasing with increasing noise in the data, and a broad, non-normal distribution of values. 
 This means that, on average, the linearized approach will overestimate the value of $k$. 
 %
