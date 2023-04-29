@@ -34,7 +34,8 @@ while has_zero.size > 0:
     has_zero = np.where(At <= 0)[1]
 
 X = np.array([t, np.ones_like(t)]).T
-W = np.linalg.inv(np.eye(t.size) * scale)
+prop_scale = scale / At
+W = np.linalg.inv(np.eye(t.size) * prop_scale)
 wls = np.linalg.inv(X.T @ W @ X) @ X.T @ W @ np.log(At)
 k_lin = -wls[0]
 # A0_lin = np.exp(wls[1])
