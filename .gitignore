@@ -1,7 +1,6 @@
 # Snakemake and showyourwork temporaries
 **/.snakemake
 **/.showyourwork*
-**/.DS_store
 
 # Showyourwork output files
 /*.pdf
@@ -14,3 +13,5 @@ src/tex/figures/*
 # Miscellaneous
 __pycache__
 *.synctex.gz
+cover-letter*
+**/.DS_store
