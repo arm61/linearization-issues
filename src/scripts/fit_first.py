@@ -45,8 +45,11 @@ for j in At.T:
     print(scale)
     W = np.linalg.inv(np.eye(t.size) * prop_scale)
     wls = np.linalg.inv(X.T @ W @ X) @ X.T @ W @ np.log(j)
+    wls_cov = np.linalg.inv(X.T @ W @ X)
+    print(wls_cov)
     k_lin = np.append(k_lin, -wls[0])
     popt, pcov = curve_fit(first_order, t, j, sigma=np.ones_like(t) * scale, p0=[k, A0])
+    print(pcov)
     k_non = np.append(k_non, popt[0])
     # A0_non = np.append(A0_non, popt[1])
 
