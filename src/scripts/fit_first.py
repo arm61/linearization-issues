@@ -26,7 +26,7 @@ def first_order(t: np.ndarray, k: float, A0: float) -> np.ndarray:
 
 
 t = np.arange(2, 22, 2)
-scale = 0.05
+scale = 0.3
 size = int(2 ** 15)
 At = rng.normal(loc=first_order(t[:, np.newaxis], k, A0), scale=scale, size=(t.size, size))
 has_zero = np.where(At < 0)[1]
@@ -39,8 +39,10 @@ k_lin = np.array([])
 # A0_lin = np.exp(wls[1])
 k_non = np.array([])
 # A0_non = np.array([])
-for i, j in enumerate(At.T):
+for j in At.T:
     prop_scale = scale / j
+    print(prop_scale)
+    print(scale)
     W = np.linalg.inv(np.eye(t.size) * prop_scale)
     wls = np.linalg.inv(X.T @ W @ X) @ X.T @ W @ np.log(j)
     k_lin = np.append(k_lin, -wls[0])
