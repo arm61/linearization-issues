@@ -10,6 +10,7 @@ import _fig_params as fp
 rng = np.random.default_rng(1)
 
 k = 0.15
+A0 = 7.5
 
 def first_order(t: np.ndarray, k: float, A0: float) -> np.ndarray:
     """
@@ -27,10 +28,10 @@ def first_order(t: np.ndarray, k: float, A0: float) -> np.ndarray:
 t = np.arange(2, 22, 2)
 scale = 0.3
 size = int(2 ** 15)
-At = rng.normal(loc=first_order(t[:, np.newaxis], k), scale=scale, size=(t.size, size))
+At = rng.normal(loc=first_order(t[:, np.newaxis], k, A0), scale=scale, size=(t.size, size))
 has_zero = np.where(At < 0)[1]
 while has_zero.size > 0:
-    At[:, has_zero] = rng.normal(loc=first_order(t[:, np.newaxis], k), scale=scale, size=(t.size, has_zero.size))
+    At[:, has_zero] = rng.normal(loc=first_order(t[:, np.newaxis], k, A0), scale=scale, size=(t.size, has_zero.size))
     has_zero = np.where(At <= 0)[1]
 
 X = np.array([t, np.ones_like(t)]).T
@@ -43,7 +44,7 @@ for i, j in enumerate(At.T):
     W = np.linalg.inv(np.eye(t.size) * prop_scale)
     wls = np.linalg.inv(X.T @ W @ X) @ X.T @ W @ np.log(j)
     k_lin = np.append(k_lin, -wls[0])
-    popt, pcov = curve_fit(first_order, t, j, sigma=np.ones_like(t) * scale, p0=[k, 0.75])
+    popt, pcov = curve_fit(first_order, t, j, sigma=np.ones_like(t) * scale, p0=[k, A0])
     k_non = np.append(k_non, popt[0])
     # A0_non = np.append(A0_non, popt[1])
 
