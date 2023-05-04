@@ -11,7 +11,7 @@ rng = np.random.default_rng(1)
 
 k = 0.15
 
-def first_order(t: np.ndarray, k: float) -> np.ndarray:
+def first_order(t: np.ndarray, k: float, A0: float) -> np.ndarray:
     """
     The first order integrated rate equation.
 
@@ -21,7 +21,7 @@ def first_order(t: np.ndarray, k: float) -> np.ndarray:
 
     :return: The concentration at time t.
     """
-    return 7.5 * np.exp(-1 * k  * t)
+    return A0 * np.exp(-1 * k  * t)
 
 
 t = np.arange(2, 22, 2)
@@ -34,15 +34,16 @@ while has_zero.size > 0:
     has_zero = np.where(At <= 0)[1]
 
 X = np.array([t, np.ones_like(t)]).T
-prop_scale = scale / At
-W = np.linalg.inv(np.eye(t.size) * prop_scale)
-wls = np.linalg.inv(X.T @ W @ X) @ X.T @ W @ np.log(At)
-k_lin = -wls[0]
+k_lin = np.array([])
 # A0_lin = np.exp(wls[1])
 k_non = np.array([])
 # A0_non = np.array([])
 for i, j in enumerate(At.T):
-    popt, pcov = curve_fit(first_order, t, j, sigma=np.ones_like(t) * scale, p0=[k])
+    prop_scale = scale / j
+    W = np.linalg.inv(np.eye(t.size) * prop_scale)
+    wls = np.linalg.inv(X.T @ W @ X) @ X.T @ W @ np.log(j)
+    k_lin = np.append(k_lin, -wls[0])
+    popt, pcov = curve_fit(first_order, t, j, sigma=np.ones_like(t) * scale, p0=[k, 0.75])
     k_non = np.append(k_non, popt[0])
     # A0_non = np.append(A0_non, popt[1])
 
