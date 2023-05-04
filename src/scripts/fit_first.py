@@ -26,7 +26,7 @@ def first_order(t: np.ndarray, k: float, A0: float) -> np.ndarray:
 
 
 t = np.arange(2, 22, 2)
-scale = 0.5
+scale = 0.33
 size = int(2 ** 15)
 At = rng.normal(loc=first_order(t[:, np.newaxis], k, A0), scale=scale, size=(t.size, size))
 has_zero = np.where(At < 0)[1]
@@ -82,8 +82,8 @@ axes[-1].stairs(y, x, color=fp.colors[2], alpha=0.5, fill=True)
 axes[-1].axvline((k_non / k).mean(), color=fp.colors[2])
 axes[-1].set_xlabel('$\hat{k}_{\mathrm{non}} k^{-1}$')
 axes[-1].set_ylabel('$p(\hat{k}_{\mathrm{non}} k^{-1})$')
-axes[-1].set_xticks([0.9, 1, 1.1])
-axes[-1].set_yticks([0, 4, 8])
+# axes[-1].set_xticks([0.9, 1, 1.1])
+# axes[-1].set_yticks([0, 4, 8])
 
 axes.append(fig.add_subplot(gs[1, 1]))
 titles.append("d")
