@@ -9,7 +9,7 @@ import _fig_params as fp
 
 rng = np.random.default_rng(1)
 
-k = 0.5
+k = 0.15
 A0 = 7.5
 
 def first_order(t: np.ndarray, k: float, A0: float) -> np.ndarray:
