@@ -26,12 +26,12 @@ def first_order(t: np.ndarray, k: float, A0: float) -> np.ndarray:
 
 
 t = np.arange(2, 22, 2)
-scale = 0.05
+scale = 0.3
 size = int(2 ** 15)
-At = rng.normal(loc=first_order(t[:, np.newaxis], k, A0), scale=scale * first_order(t[:, np.newaxis], k, A0), size=(t.size, size))
+At = rng.normal(loc=first_order(t[:, np.newaxis], k, A0), scale=scale, size=(t.size, size))
 has_zero = np.where(At < 0)[1]
 while has_zero.size > 0:
-    At[:, has_zero] = rng.normal(loc=first_order(t[:, np.newaxis], k, A0), scale=scale * first_order(t[:, np.newaxis], k, A0), size=(t.size, has_zero.size))
+    At[:, has_zero] = rng.normal(loc=first_order(t[:, np.newaxis], k, A0), scale=scale, size=(t.size, has_zero.size))
     has_zero = np.where(At <= 0)[1]
 
 X = np.array([t, np.ones_like(t)]).T
@@ -40,13 +40,13 @@ k_lin = np.array([])
 k_non = np.array([])
 # A0_non = np.array([])
 for j in At.T:
-    prop_scale = t * scale / j
+    prop_scale = scale / j
     print(prop_scale)
     print(scale)
     W = np.linalg.inv(np.eye(t.size) * prop_scale)
     wls = np.linalg.inv(X.T @ W @ X) @ X.T @ W @ np.log(j)
     k_lin = np.append(k_lin, -wls[0])
-    popt, pcov = curve_fit(first_order, t, j, sigma=t * scale, p0=[k, A0])
+    popt, pcov = curve_fit(first_order, t, j, sigma=np.ones_like(t) * scale, p0=[k, A0])
     k_non = np.append(k_non, popt[0])
     # A0_non = np.append(A0_non, popt[1])
 
