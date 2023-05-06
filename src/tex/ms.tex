@@ -79,7 +79,7 @@ This means that, on average, the linearized approach will overestimate the value
 %
 
 Through the use of OLS or non-weighted optimisation we are assuming that the uncertainties in our data are all the same, i.e., they are homoscedastic. 
-It was noted by Perrin~\cite{perrin_linear_2017}, however, that homoscedastic uncertainties may become heteroscedastic as a result of the linearization process. 
+It was noted by Perrin~\cite{perrin_linear_2017}, however, that homoscedastic uncertainties may become heteroscedastic as a result of the linearization process (note the error bars in Fig.~\ref{fig:wls}b). 
 Therefore, the use of OLS for linearized data is insufficient, instead we should accurately propagate the measured uncertainty, for the example in Eqn.~\ref{eqn:log} the propagated error is the measured error divided by the nominal value (Fig.~\ref{fig:wls}b), and used weighted least squares (WLS).
 
 It was previously noted by Perrin~\cite{perrin_linear_2017} that the linearisation process will produce uncertainty that is not the same for all values. 
@@ -89,9 +89,9 @@ This leads to significant improvement in the distribution of $\hat{k}$, with an 
 This 
 
 
-However, this reveals a different problem, from each analysis, we can estimated the uncertainty in $\hat{k}$, and using WLS we significantly overestimate this. 
-The true uncertainty, the width of the solid distribution, using WLS is found to be \variable{output/lin_err_true.txt}, however the mean estimated uncertainty was \variable{output/lin_err.txt}. 
-We compare this with the result from the non-linear approach, where the true uncertainty is smaller than the WLS approach (i.e., more precise) with a value of \variable{output/non_err_true.txt} and the mean estimated value was \variable{output/non_err.txt}.
+% However, this reveals a different problem, from each analysis, we can estimated the uncertainty in $\hat{k}$, and using WLS we significantly overestimate this. 
+% The true uncertainty, the width of the solid distribution, using WLS is found to be \variable{output/lin_err_true.txt}, however the mean estimated uncertainty was \variable{output/lin_err.txt}. 
+% We compare this with the result from the non-linear approach, where the true uncertainty is smaller than the WLS approach (i.e., more precise) with a value of \variable{output/non_err_true.txt} and the mean estimated value was \variable{output/non_err.txt}.
 %
 \begin{figure}
   \includegraphics[width=0.5\columnwidth]{figures/wls.pdf}
