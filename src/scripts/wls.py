@@ -36,22 +36,24 @@ while has_zero.size > 0:
 
 X = np.array([t, np.ones_like(t)]).T
 k_lin = np.array([])
-# A0_lin = np.exp(wls[1])
+k_err_lin = np.array([])
 k_non = np.array([])
-# A0_non = np.array([])
+k_err_non = np.array([])
 for j in At.T:
     prop_scale = scale / j
-    print(prop_scale)
-    print(scale)
     W = np.linalg.inv(np.eye(t.size) * prop_scale)
     wls = np.linalg.inv(X.T @ W @ X) @ X.T @ W @ np.log(j)
     wls_cov = np.linalg.inv(X.T @ W @ X)
-    print(wls_cov)
+    k_err_lin = np.append(k_err_lin, np.sqrt(wls_cov.diagonal())[0])
     k_lin = np.append(k_lin, -wls[0])
     popt, pcov = curve_fit(first_order, t, j, sigma=np.ones_like(t) * scale, p0=[k, A0])
-    print(pcov)
+    k_err_non = np.append(k_err_non, np.sqrt(pcov.diagonal())[0])
     k_non = np.append(k_non, popt[0])
-    # A0_non = np.append(A0_non, popt[1])
+
+print(k_lin.std())
+print(k_err_lin.mean())
+print(k_non.std())
+print(k_err_non.mean())
 
 figsize = figsizes.icml2022_half(nrows=2, ncols=2, height_to_width_ratio=0.8)['figure.figsize']
 fig = plt.figure(figsize=figsize)
@@ -125,5 +127,5 @@ for i, ax in enumerate(axes):
     fig.text(x, y, titles[i], ha='left', fontweight='bold')
 
 # plt.figlegend(loc='upper center', bbox_to_anchor=(0.5, -0.01), ncol=3)
-plt.savefig(paths.figures / "fit_first.pdf")
+plt.savefig(paths.figures / "wls.pdf")
 plt.close()
