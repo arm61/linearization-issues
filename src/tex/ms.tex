@@ -64,14 +64,14 @@ If we were to perform repeated measurements of the concentration of \ce{H2O2} as
 Either linearization of the data followed by ordinary least squares (OLS) regression or non-weighted non-linear optimization can be used. 
 Non-linear fitting results in a normal distribution of estimated values of $k$, with a mean, normalised by the true $k$, of \variable{output/non_mean_ols.txt}, i.e., the estimation is unbiased. 
 The linearized form, however, gives a biased estimate of $k$, with a normalised mean of \variable{output/lin_mean_ols.txt}, the magnitude of the bias increases with increasing noise in the data.
-Additionally, the distribution of values from the linearized from is significantly broader (a \SI{95}{\percent} confidence interval range of \variable{output/lin_ci_ols.txt}) than the non-linear result (\SI{95}{\percent} confidence interval range of \variable{output/non_ci_ols.txt}).
+Additionally, the distribution of values from the linearized form is significantly broader (a \SI{95}{\percent} confidence interval range of \variable{output/lin_ci_ols.txt}) than the non-linear result (\SI{95}{\percent} confidence interval range of \variable{output/non_ci_ols.txt}).
 This means that, on average, the linearized approach will overestimate the value of $k$ and estimate a value for $k$ further from the true value. 
 %
 \begin{figure}
   \includegraphics[width=0.5\columnwidth]{figures/ols.pdf}
   \caption{
     Representative data for first-order integrated rate equation, with a true value of $k=\SI{0.15}{\per\second}$ and $[\ce{A}]_0=\SI{7.5}{\mol\m^{-3}}$, showing (a) the non-linear and (b) the linearized forms. 
-    The estimate of $k$, normalised to the true value of $k$, from $2^{15}$ analyses of unique representative datasets, where $[\ce{A}]_0$ was fixed to the true value, using (c) non-linear fitting and (d) linearization, the vertical lines indicate the mean of the distribution. 
+    The estimate of $k$, normalised to the true value of $k$, from $2^{15}$ analyses of unique representative datasets, using (c) non-weighted non-linear fitting and (d) linearization and ordinary least squares, the vertical lines indicate the mean of the distribution. 
     }
   \label{fig:ols}
   \script{ols.py}
@@ -80,34 +80,23 @@ This means that, on average, the linearized approach will overestimate the value
 
 Through the use of OLS or non-weighted optimisation we are assuming that the uncertainties in our data are all the same, i.e., they are homoscedastic. 
 It was noted by Perrin~\cite{perrin_linear_2017}, however, that homoscedastic uncertainties may become heteroscedastic as a result of the linearization process (note the error bars in Fig.~\ref{fig:wls}b). 
-Therefore, the use of OLS for linearized data is insufficient, instead we should accurately propagate the measured uncertainty, for the example in Eqn.~\ref{eqn:log} the propagated error is the measured error divided by the nominal value (Fig.~\ref{fig:wls}b), and use weighted least squares (WLS).
-
-
-It was previously noted by Perrin~\cite{perrin_linear_2017} that the linearisation process will produce uncertainty that is not the same for all values. 
-In the above example, uncertainty in the non-linear model should be propagated by dividing each by the nominal value, producing heteroscedastic uncertainties. 
-Therefore, the use of OLS for the linearized data is insufficient, instead we should accurately propagate the measured uncertainty in our measurement, i.e. $\mathrm{d}y = \mathrm{d}x / x$, and perform weighted least squares (WLS). 
-This leads to significant improvement in the distribution of $\hat{k}$, with an unbiased normal distribution for both the weighted non-linear optimization and WLS approaches (Figs.~\ref{fig:wls}c \&~\ref{fig:wls}d).
-This 
-
-
-% However, this reveals a different problem, from each analysis, we can estimated the uncertainty in $\hat{k}$, and using WLS we significantly overestimate this. 
-% The true uncertainty, the width of the solid distribution, using WLS is found to be \variable{output/lin_err_true.txt}, however the mean estimated uncertainty was \variable{output/lin_err.txt}. 
-% We compare this with the result from the non-linear approach, where the true uncertainty is smaller than the WLS approach (i.e., more precise) with a value of \variable{output/non_err_true.txt} and the mean estimated value was \variable{output/non_err.txt}.
+Therefore, the use of OLS for linearized data is insufficient, instead, we should accurately propagate the measured uncertainty, for the example in Eqn.~\ref{eqn:log} the propagated error is the measured error divided by the nominal value (Fig.~\ref{fig:wls}b), and use weighted least squares (WLS).
+This leads to a normally distributed, but still biased distribution of $\hat{k}$ (Fig.~\ref{fig:wls}d), with a mean of \variable{output/lin_mean_wls.txt}.
+We can see that this is not the case for the non-linear optimisation with a mean of \variable{output/non_mean_wls.txt}.
+If we include uncertainty by WLS, on average the linearized approach will underestimate the value of $k$, even when the errors are correctly propagated. 
 %
 \begin{figure}
   \includegraphics[width=0.5\columnwidth]{figures/wls.pdf}
   \caption{
-    Representative data for first-order integrated rate equation, with a true value of $k=\SI{0.15}{\per\second}$ and $[\ce{A}]_0=\SI{7.5}{\mol\m^{-3}}$, showing (a) the non-linear and (b) the linearized forms. 
-    The estimate of $k$, normalised to the true value of $k$, from $2^{15}$ analyses of unique representative datasets, where $[\ce{A}]_0$ was fixed to the true value, using (c) non-linear fitting and (d) linearization, the vertical lines indicate the mean of the distribution. 
+    The same representative data as Fig.~\ref{fig:ols} with error bars of \SI{0.3}{{\mol\m^{-3}}} (a \& b) and the same number of analyses were performed, however this time using (c) weighted non-linear optimisation and (d) weighted least squares with propagated uncertainties, the vertical lines indicate the mean of the distribution. 
     }
   \label{fig:wls}
   \script{wls.py}
 \end{figure}
 %
 
-
 % Linearization involves the transformation of a normal distribution to something non-normal.
-We can understand the cause of the observed bias by recognising that the measurement of a dependent variable $y$ is only ever an estimate of the true value, $\hat{y}$, which is a random draw from a distribution of values, $P(y)$. 
+The observed bias can be understood by recognising that the measurement of a dependent variable $y$ is only ever an estimate of the true value, $\hat{y}$, which is a random draw from a distribution of values, $P(y)$. 
 The shape of this distribution depends on the noise or uncertainty in the measurement. 
 It is commonly assumed that random uncertainty sources will lead to a normal distribution, $P(y) \sim \mathcal{N}(\mu, \sigma^2)$, which is defined by the mean, $\mu$, and standard deviation, $\sigma$ (Fig.~\ref{fig:distributions})~\cite{monk_math_2010}.
 When linearization is used, some mathematical transformation is performed on the dependent variable and if that transformation scales in a non-linear fashion, i.e. the reciprocal or logarithm is taken, it will result in the normally distributed variable becoming non-normal (Figs.~\ref{fig:distributions}b \&~\ref{fig:distributions}c).
@@ -116,7 +105,7 @@ When linearization is used, some mathematical transformation is performed on the
   \includegraphics[width=0.66 \columnwidth]{figures/distributions.pdf}
   \caption{
     Histograms showing the effect of non-linearly scaling mathematical transformations on (a) a normal distribution, $\mathcal{N}(50, 10^2)$, by taking (b) the reciprocal or (c) the logarithm. 
-    Produced from $2^{15}$ random samples from the normal distribution.
+    Produced from $2^{15}$ random samples from the normal distribution $\mathcal{N}(50, 10)$.
     }
   \label{fig:distributions}
   \script{distributions.py}
@@ -124,18 +113,18 @@ When linearization is used, some mathematical transformation is performed on the
 %
 
 % Least squares/linear regression is unbiased where the dependent variable is normally distributed.
-The standard deviation of $P(y)$ can often be estimated for a given measurement and used to weight measurements based on confidence, as noted by Perrin, this is particularly important in the case of linearized data, where constant uncertainty becomes heteroscedastic~\cite{perrin_linear_2017}.
-For normally distributed variables, weighted linear regression produces unbiased estimates of the gradient and intercept. 
-However, this is not the case when non-normally distributed variables are used, and for repeated measurements, there may be a systematic difference between the observed mean of the estimated parameter and its true value.
-This is not the case when non-linear optimization by least squares is applied to normally distributed variables. 
+For normally distributed variables, both OLS and WLS produce unbiased estimates of the regression parameters. 
+However, this is not the case when non-normally distributed variables are used.
+This is not the case for the non-linear optimisation because the variables have not been transformed and are therefore still normally distributed. 
 
 % Linearization is bad, we should replace it with training in non-linear optimisation. 
-The linearization process can lead to biased estimates of parameters of interest and therefore has no place in formal analysis. 
-Yet, it is still taught regularly to chemistry students, due in part to the complexity of the more robust non-linear optimisation. 
+The biased estimates that the linearization process produces means that it has no place in formal analysis. 
+Yet, due in part to the complexity of the more robust non-linear optimisation, linearization is still taught regularly to chemistry students. 
 In a classroom or exam hall, it is feasible for a student, equipped with graph paper and a ruler to estimate the gradient and intercept of a straight line. 
-Additionally, the linearization process can be a valuable tool where quantitative analysis is not required to identify general trends in data. 
+Additionally, linearization has value where quantitative analysis is not required. 
+However, by failing to cover the problems with linearization, we fail to adequately provide students with the skills required to robustly analyse simple chemical data. 
 
-Recent developments in computing and access to programming with tools, such as the Jupyter Notebook~\cite{kluyver_jupyter_2016} and the Fit-o-mat program~\cite{mglich_open_2018}, mean that non-linear optimisation is more accessible than ever. 
+Recent developments in computing and access to programming with tools, such as the Jupyter Notebook~\cite{kluyver_jupyter_2016} or even the Solver functionality in Microsoft Excel, mean that non-linear optimisation is more accessible than ever. 
 Therefore, I believe that the deficiencies of linearization should be taught alongside the non-linear optimisation solution. 
 In addition to reducing the use of the flawed linearization process in the chemical research literature, this will give students a more rounded understanding of robust data analysis, while keeping the utility that is possible for ``quick'' analyses with linearization.
 
@@ -145,8 +134,8 @@ Electronic Supplementary Information (ESI) available: A complete set of analysis
 
 \section*{Acknowledgements}
 
-The author thanks Benjamin J. Morgan, Samuel W. Coles, Thomas Holm Rod, Gabriel Krenzer, and Kasper Tolborg for the insightful discussion that lead to this work. 
-Additionally, the author would like to thank those that engaged in discussion on Twitter when the problem of linearization in Arrhenius modelling was initially raised. 
+The author thanks Benjamin J. Morgan, Samuel W. Coles, Fiona Dickinson, Thomas Holm Rod, Gabriel Krenzer, and Kasper Tolborg for the insightful discussion that lead to this work. 
+Additionally, the author would like to thank those that engaged in discussion on Twitter, in particular Carl Poree, when the problem of linearization in Arrhenius modelling was initially raised. 
 
 \bibliography{bib}
 
