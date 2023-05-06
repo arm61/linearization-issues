@@ -29,21 +29,21 @@
 \maketitle 
 
 % Linerisation is a thing that features in chemistry degrees.
-Non-linear relationships are commonly found between dependent and independent variables in chemistry. 
-``Linearization'' is a popular solution to quantify such relationships, where some mathematical transformation is used to reduce the non-linear problem to a linear one. 
-The relationship can then be quantified using the analytical linear regression, rather than the numerical optimisation required for non-linear fitting. 
-We see this in first- and second-order rate equations, and the Clausius-Clapeyron and Arrhenius equations, to name just a few~\cite{perrin_linear_2017,harper_data_2017,monk_math_2010}.
-The simplicity and utility of linearization has led to its appearance in chemistry textbooks~\cite{monk_math_2010,atkins_physical_2018} and undergraduate programs. 
+Non-linear relationships are commonly found between dependent and independent variables in chemistry.
+These non-linear relationships can be simplified by the process of ``linearization'', where some mathematical transformation is used to reduce the non-linear problem to a linear one. 
+By linearizing the function, analytical linear regression can be used to quantify parameters of interest, rather than the numerical optimisation that is required for non-linear fitting. 
+We see this process in chemistry textbooks~\cite{monk_math_2010,atkins_physical_2018} and undergraduate programs, where it is applied to  first- and second-order rate equations, and the Clausius-Clapeyron and Arrhenius equations, to name just a few~\cite{perrin_linear_2017,harper_data_2017,monk_math_2010}.
 
 % Linearization appears in research literature cause it is taught in degree programmes. 
 The linearization process is mathematically sound for noise-free measurements. 
-However, as we shall see, the use of linearization to reduce a non-linear function to a linear form, followed by analysis with linear regression, can lead to biased estimates of the regression parameters; the gradient and intercept of the straight line. 
+However, as we shall see, the use of linearization to reduce a non-linear function to a linear form, followed by analysis with linear regression, can introduce errors to the analysis process. 
+Specifically, it can lead to biased estimates of regression parameters; the gradient and intercept of the straight line, as well as, inaccurate estimates of their variances. 
 Therefore, the use of linearization should be avoided in formal analysis, however, it is still regularly found in research publications. 
 This is due to the continued inclusion of linearization in a general chemistry education, without discussion of its problems. 
 Non-linear optimisation is now accessible, through standard analysis software and programming languages, and lacks the pitfalls of linearization. 
 
 % Example of linearization to show problem -- background.
-A simple example can show the bias that linearisation introduces in the estimates of regression parameters. 
+A simple example can show the problems that linearisation introduces in the analysis process.
 Consider the decomposition of hydrogen peroxide \ce{H2O2} in the presence of excess cerium(III) ion, which follows first-order rate kinetics (this example has been taken from Monk and Munro~\cite{monk_math_2010})
 %
 \begin{equation}
@@ -51,32 +51,53 @@ Consider the decomposition of hydrogen peroxide \ce{H2O2} in the presence of exc
     \label{eqn:first}
 \end{equation}
 %
-where, $[\ce{H2O2}]_t$ is the concentration of hydrogen peroxide at time $t$, $[\ce{H2O2}]_0$ is the initial concentration and $k$ is the rate constant (shown in the non-linear form with representative data in Fig.~\ref{fig:fit_first}a).
+where, $[\ce{H2O2}]_t$ is the concentration of hydrogen peroxide at time $t$, $[\ce{H2O2}]_0$ is the initial concentration and $k$ is the rate constant (shown in the non-linear form with representative data in Fig.~\ref{fig:ols}a).
 Linearization of Eqn.~\ref{eqn:first} involves taking the natural logarithm of both sides to produce
 %
 \begin{equation}
     \ln{[\ce{H2O2}]_t} = -kt + \ln{[\ce{H2O2}]_0}.
 \end{equation}
 %
-The gradient and intercept from linear regression are therefore equal to $-k$ and $\ln{[\ce{A}]_0}$, respectively (Fig.~\ref{fig:fit_first}b).
+The gradient and intercept from linear regression are therefore equal to $-k$ and $\ln{[\ce{A}]_0}$, respectively (Fig.~\ref{fig:ols}b).
 
 % Example of linearization to show problem -- result.
-If we are to perform repeated measurements (in the case of Fig.~\ref{fig:fit_first}, $2^{15}$ repeats) of the concentration of \ce{H2O2} as a function of reaction time and analyse each repeat with both the linearization process and non-linear fitting, a range of estimates of $k$ will be obtained from each (Fig.~\ref{fig:fit_first}c \&~\ref{fig:fit_first}d).
-The non-linear fitting results in a normal distribution of estimated values of $k$, with a mean, normalised by true $k$, of \variable{output/non_mean.txt}, i.e. the estimation is unbiased, and a \SI{95}{\percent} confidence interval range of \variable{output/non_ci.txt}.
-Using the linearized form gives a biased estimate of $k$, with a normalised mean of \variable{output/lin_mean.txt}, the magnitude of the bias increases with increasing noise in the data.
-This non-normal distribution is also significantly broader than the non-linear optimisation estimate, with a \SI{95}{\percent} confidence interval range of \variable{output/lin_ci.txt}
+If we are to perform repeated measurements (in the case of Fig.~\ref{fig:ols}, $2^{15}$ repeats) of the concentration of \ce{H2O2} as a function of reaction time we can build up a distribution of estimates of $k$ (Fig.~\ref{fig:ols}c \&~\ref{fig:ols}d). 
+This can be done with either linearization followed by ordinary least squares (OLS) regression or non-weighted non-linear fitting; by performing OLS and non-weighted fitting, we are assuming that the uncertainty is homoscedastic, i.e., it is the same for all values. 
+The non-linear fitting results in a normal distribution of estimated values of $k$, with a mean, normalised by true $k$, of \variable{output/non_mean_ols.txt}, i.e. the estimation is unbiased, and a \SI{95}{\percent} confidence interval range of \variable{output/non_ci_ols.txt}.
+Using the linearized form gives a biased estimate of $k$, with a normalised mean of \variable{output/lin_mean_ols.txt}, the magnitude of the bias increases with increasing noise in the data.
+This non-normal distribution is also significantly broader than the non-linear optimisation estimate, with a \SI{95}{\percent} confidence interval range of \variable{output/lin_ci_ols.txt}
 This means that, on average, the linearized approach will overestimate the value of $k$ and estimate a value for $k$ further from the true value. 
+%
+\begin{figure}
+  \includegraphics[width=0.5\columnwidth]{figures/ols.pdf}
+  \caption{
+    Representative data for first-order integrated rate equation, with a true value of $k=\SI{0.15}{\per\second}$ and $[\ce{A}]_0=\SI{7.5}{\mol\m^{-3}}$, showing (a) the non-linear and (b) the linearized forms. 
+    The estimate of $k$, normalised to the true value of $k$, from $2^{15}$ analyses of unique representative datasets, where $[\ce{A}]_0$ was fixed to the true value, using (c) non-linear fitting and (d) linearization, the vertical lines indicate the mean of the distribution. 
+    }
+  \label{fig:ols}
+  \script{ols.py}
+\end{figure}
+%
+
+It was previously noted by Perrin~\cite{perrin_linear_2017} that the linearisation process will produce uncertainty that is not the same for all values. 
+In the above example, uncertainty in the non-linear model should be propagated by dividing each by the nominal value, producing heteroscedastic uncertainties. 
+Therefore, the use of OLS for the linearized data is insufficient, instead we should accurately propagate the measured uncertainty in our measurement, i.e. $\mathrm{d}y = \mathrm{d}x / x$, and perform weighted least squares (WLS). 
+In Fig~\ref{fig:wls}, we see significant improvement in the resulting distributions of $\hat{k}$, with no bias shown for the linearized form. 
+However, now we can see a different problem, from each analysis, we can estimate the uncertainty in $k$, and using WLS we significantly overestimate this.
+The true uncertainty, the width of the solid distribution, using WLS is found to be \output{output/lin_err_true.txt}
 %
 \begin{figure}
   \includegraphics[width=0.5\columnwidth]{figures/wls.pdf}
   \caption{
-    Representative data for first-order integrated rate equation, with a true value of $k=\SI{0.15}{\per\second}$ and $[\ce{A}]_0=\SI{7.5}{\mol\m^{-3}}$ and a constant uncertainty of \SI{0.3}{\mol\m^{-3}}, showing (a) the non-linear and (b) the linearized forms. 
+    Representative data for first-order integrated rate equation, with a true value of $k=\SI{0.15}{\per\second}$ and $[\ce{A}]_0=\SI{7.5}{\mol\m^{-3}}$, showing (a) the non-linear and (b) the linearized forms. 
     The estimate of $k$, normalised to the true value of $k$, from $2^{15}$ analyses of unique representative datasets, where $[\ce{A}]_0$ was fixed to the true value, using (c) non-linear fitting and (d) linearization, the vertical lines indicate the mean of the distribution. 
     }
   \label{fig:wls}
   \script{wls.py}
 \end{figure}
 %
+
+
 
 % Linearization involves the transformation of a normal distribution to something non-normal.
 We can understand the cause of the observed bias by recognising that the measurement of a dependent variable $y$ is only ever an estimate of the true value, $\hat{y}$, which is a random draw from a distribution of values, $P(y)$. 
