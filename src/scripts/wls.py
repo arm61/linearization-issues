@@ -99,10 +99,10 @@ axes[-1].set_ylabel('$p(\hat{k}_{\mathrm{lin}} k^{-1})$')
 # axes[-1].set_xticks([1, 2, 3, 4])
 
 f = open(paths.output / 'lin_mean_wls.txt', 'w')
-f.write(r'\num{' + f'{np.mean(k_lin / k):.3f}' + r'}')
+f.write(r'\num{' + f'{np.mean(k_lin / k):.2f}' + r'}')
 f.close()
 f = open(paths.output / 'non_mean_wls.txt', 'w')
-f.write(r'\num{' + f'{np.mean(k_non / k):.3f}' + r'}')
+f.write(r'\num{' + f'{np.mean(k_non / k):.2f}' + r'}')
 f.close()
 
 fig.align_ylabels(axes)
