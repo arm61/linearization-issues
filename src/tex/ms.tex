@@ -84,7 +84,7 @@ In the above example, uncertainty in the non-linear model should be propagated b
 Therefore, the use of OLS for the linearized data is insufficient, instead we should accurately propagate the measured uncertainty in our measurement, i.e. $\mathrm{d}y = \mathrm{d}x / x$, and perform weighted least squares (WLS). 
 In Fig~\ref{fig:wls}, we see significant improvement in the resulting distributions of $\hat{k}$, with no bias shown for the linearized form. 
 However, now we can see a different problem, from each analysis, we can estimate the uncertainty in $k$, and using WLS we significantly overestimate this.
-% The true uncertainty, the width of the solid distribution, using WLS is found to be \output{output/lin_err_true.txt}
+The true uncertainty, the width of the solid distribution, using WLS is found to be \output{output/lin_err_true.txt}
 %
 \begin{figure}
   \includegraphics[width=0.5\columnwidth]{figures/wls.pdf}

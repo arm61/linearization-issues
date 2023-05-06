@@ -99,10 +99,10 @@ axes[-1].set_ylabel('$p(\hat{k}_{\mathrm{lin}} k^{-1})$')
 # axes[-1].set_xticks([1, 2, 3, 4])
 
 
-print(k_lin.std())
-print(k_err_lin.mean())
-print(k_non.std())
-print(k_err_non.mean())
+print(k_lin.std() / k)
+print(k_err_lin.mean() / k)
+print(k_non.std() / k)
+print(k_err_non.mean() / k)
 
 f = open(paths.output / 'lin_err.txt', 'w')
 f.write(r'\num{' + f'{np.mean(k_err_lin.mean() / k):.2f}' + r'}')
