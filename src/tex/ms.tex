@@ -20,7 +20,7 @@
 % Abstract with filler text
 \begin{abstract}
     The use of mathematical transformations to reduce non-linear functions to linear problems that can be tackled with analytical linear regression is commonplace in the chemistry curriculum. 
-    The linearization procedure, however, assumes an incorrect statistical model for real experimental data; leading to biased estimates of regression parameters and inaccurate uncertainty propagation through the analysis process. 
+    The linearization procedure, however, assumes an incorrect statistical model for real experimental data; leading to biased estimates of regression parameters. 
     Modern computing technology means that non-linear optimization is more accessible than ever. 
     So, by introducing students to linearization, without a detailed discussion of the shortcomings, we are failing to equip students with correct tools for formal data analysis. 
     I hope that this commentary will start a discussion in the community as to the place of linearization in the chemistry curriculum. 
@@ -32,24 +32,25 @@
 Non-linear relationships are commonly found between dependent and independent variables in chemistry.
 These relationships can be simplified by the process of ``linearization'', where some mathematical transformation is used to reduce the non-linear problem to a linear one. 
 By linearizing the function, analytical linear regression can be used to quantify parameters of interest, rather than relying on numerical optimisation. 
-We see this process in chemistry textbooks~\cite{monk_math_2010,atkins_physical_2018} and undergraduate programs, where it is applied to first- and second-order rate equations, and the Clausius-Clapeyron and Arrhenius equations, to name just a few~\cite{perrin_linear_2017,harper_data_2017,monk_math_2010}.
+We see this process in chemistry textbooks~\cite{monk_math_2010,atkins_physical_2018} and undergraduate programs, for example where it is applied to first- and second-order rate equations, and the Clausius-Clapeyron and Arrhenius equations~\cite{perrin_linear_2017,harper_data_2017,monk_math_2010}.
 
 % Linearization appears in research literature cause it is taught in degree programmes. 
 While mathematically sound for noise-free measurements, linearization can introduce errors in the analysis process for real experimental data. 
 Specifically, it can lead to biased estimates of regression parameters; the gradient and intercept of the straight line, as well as, inaccurate estimates of their uncertainty. 
-Therefore, the use of linearization should be avoided in formal analysis.
-Because linearization is included in a general chemistry education, without discussion of its problems, it is still regularly found in research publications. 
-Although not analytically tractable, non-linear optimisation is now accessible, through standard analysis software and programming languages, and lacks the pitfalls of linearization. 
+Therefore, the use of linearization should be avoided in formal analysis. 
+However, because linearization is included in a general chemistry education, without discussion of its problems, it is still regularly found in research publications. 
+Although not analytically tractable, non-linear optimisation is now accessible, through standard analysis software and programming languages.
+Non-linear optimisation lacks the pitfalls of linearization and should be applied in formal analysis.
 
 % Example of linearization to show problem -- background.
-To show the problems of linearization, we can consider the decomposition of hydrogen peroxide \ce{H2O2} in the presence of excess cerium(III) ion, which follows first-order rate kinetics~\cite{monk_math_2010}
+To show the problem that results from linearization, we can consider the decomposition of hydrogen peroxide \ce{H2O2} in the presence of excess cerium(III) ion, which follows first-order rate kinetics~\cite{monk_math_2010}
 %
 \begin{equation}
     [\ce{H2O2}]_t = [\ce{H2O2}]_0\exp{(-kt)},
     \label{eqn:first}
 \end{equation}
 %
-where, $[\ce{H2O2}]_t$ is the concentration of hydrogen peroxide at time $t$, $[\ce{H2O2}]_0$ is the initial concentration and $k$ is the rate constant (shown in the non-linear form with representative data in Fig.~\ref{fig:ols}a).
+where, $[\ce{H2O2}]_t$ is the concentration of hydrogen peroxide at time $t$, $[\ce{H2O2}]_0$ is the initial concentration and $k$ is the rate constant (shown with representative data in Fig.~\ref{fig:ols}a).
 Linearization of Eqn.~\ref{eqn:first} involves taking the natural logarithm of both sides to produce
 %
 \begin{equation}
@@ -61,9 +62,9 @@ The gradient and intercept from linear regression are therefore equal to $-k$ an
 
 % Example of linearization to show problem -- result.
 If we were to perform repeated measurements of the concentration of \ce{H2O2} as a function of reaction time and analyse each repeat, we can build up a distribution of estimates of $k$ (Fig.~\ref{fig:ols}c \&~\ref{fig:ols}d). 
-Either linearization of the data followed by ordinary least squares (OLS) regression or non-weighted non-linear optimization can be used. 
+Either linearization followed by ordinary least squares (OLS) regression or non-weighted non-linear optimization can be used. 
 Non-linear fitting results in a normal distribution of estimated values of $k$, with a mean, normalised by the true $k$, of \variable{output/non_mean_ols.txt}, i.e., the estimation is unbiased. 
-The linearized form, however, gives a biased estimate of $k$, with a normalised mean of \variable{output/lin_mean_ols.txt}, the magnitude of the bias increases with increasing noise in the data.
+The linearized form, however, gives a biased estimate of $k$ with a normalised mean of \variable{output/lin_mean_ols.txt}. 
 Additionally, the distribution of values from the linearized form is significantly broader (a \SI{95}{\percent} confidence interval range of \variable{output/lin_ci_ols.txt}) than the non-linear result (\SI{95}{\percent} confidence interval range of \variable{output/non_ci_ols.txt}).
 This means that, on average, the linearized approach will overestimate the value of $k$ and estimate a value for $k$ further from the true value. 
 %
@@ -78,17 +79,18 @@ This means that, on average, the linearized approach will overestimate the value
 \end{figure}
 %
 
-Through the use of OLS or non-weighted optimisation we are assuming that the uncertainties in our data are all the same, i.e., they are homoscedastic. 
+Through the use of OLS or non-weighted optimisation, we are assuming that the uncertainties in our data are all the same, i.e., they are homoscedastic. 
 It was noted by Perrin~\cite{perrin_linear_2017}, however, that homoscedastic uncertainties may become heteroscedastic as a result of the linearization process (note the error bars in Fig.~\ref{fig:wls}b). 
-Therefore, the use of OLS for linearized data is insufficient, instead, we should accurately propagate the measured uncertainty, for the example in Eqn.~\ref{eqn:log} the propagated error is the measured error divided by the nominal value (Fig.~\ref{fig:wls}b), and use weighted least squares (WLS).
-This leads to a normally distributed, but still biased distribution of $\hat{k}$ (Fig.~\ref{fig:wls}d), with a mean of \variable{output/lin_mean_wls.txt}.
-We can see that this is not the case for the non-linear optimisation with a mean of \variable{output/non_mean_wls.txt}.
-If we include uncertainty by WLS, on average the linearized approach will underestimate the value of $k$, even when the errors are correctly propagated. 
+Therefore, the use of OLS for linearized data is insufficient, instead, we should accurately propagate the measurement uncertainty and use weighted least squares (WLS).
+For the example in Eqn.~\ref{eqn:log}, the propagated error is the measured error divided by the nominal value (Fig.~\ref{fig:wls}b).
+This approach leads to a normally distributed, but still biased distribution of $\hat{k}$ (Fig.~\ref{fig:wls}d), with a normalised mean of \variable{output/lin_mean_wls.txt}.
+We can see that this is not the case for the non-linear optimisation with a normalised mean of \variable{output/non_mean_wls.txt}.
+Even when the errors are correctly propagated and included in the analysis by WLS, on average, the linearization approach will underestimate the value of $k$.
 %
 \begin{figure}
   \includegraphics[width=0.5\columnwidth]{figures/wls.pdf}
   \caption{
-    The same representative data as Fig.~\ref{fig:ols} with error bars of \SI{0.3}{{\mol\m^{-3}}} (a \& b) and the same number of analyses were performed, however this time using (c) weighted non-linear optimisation and (d) weighted least squares with propagated uncertainties, the vertical lines indicate the mean of the distribution. 
+    The same representative data as Fig.~\ref{fig:ols} with error bars of \SI{0.3}{{\mol\m^{-3}}} (a \& b) and the same number of analyses were performed, however, this time using (c) weighted non-linear optimisation and (d) weighted least squares with propagated uncertainties, the vertical lines indicate the mean of the distribution. 
     }
   \label{fig:wls}
   \script{wls.py}
@@ -96,10 +98,10 @@ If we include uncertainty by WLS, on average the linearized approach will undere
 %
 
 % Linearization involves the transformation of a normal distribution to something non-normal.
-The observed bias can be understood by recognising that the measurement of a dependent variable $y$ is only ever an estimate of the true value, $\hat{y}$, which is a random draw from a distribution of values, $P(y)$. 
+The observed bias can be understood by recognising that the measurement of any variable $y$ is only ever an estimate of the true value, $\hat{y}$, which is a random draw from a distribution of values, $p(y)$. 
 The shape of this distribution depends on the noise or uncertainty in the measurement. 
-It is commonly assumed that random uncertainty sources will lead to a normal distribution, $P(y) \sim \mathcal{N}(\mu, \sigma^2)$, which is defined by the mean, $\mu$, and standard deviation, $\sigma$ (Fig.~\ref{fig:distributions})~\cite{monk_math_2010}.
-When linearization is used, some mathematical transformation is performed on the dependent variable and if that transformation scales in a non-linear fashion, i.e. the reciprocal or logarithm is taken, it will result in the normally distributed variable becoming non-normal (Figs.~\ref{fig:distributions}b \&~\ref{fig:distributions}c).
+It is commonly assumed that random uncertainty sources will lead to a normal distribution, $p(y) \sim \mathcal{N}(\mu, \sigma^2)$, which is defined by the mean, $\mu$, and standard deviation, $\sigma$ (Fig.~\ref{fig:distributions})~\cite{monk_math_2010}.
+When linearization is used, some mathematical transformation is performed on the dependent variable and if that transformation scales in a non-linear fashion, i.e., the reciprocal or logarithm is taken, it will result in the normally distributed variable becoming non-normal (Figs.~\ref{fig:distributions}b \&~\ref{fig:distributions}c).
 %
 \begin{figure}
   \includegraphics[width=0.66 \columnwidth]{figures/distributions.pdf}
@@ -113,16 +115,17 @@ When linearization is used, some mathematical transformation is performed on the
 %
 
 % Least squares/linear regression is unbiased where the dependent variable is normally distributed.
-For normally distributed variables, both OLS and WLS produce unbiased estimates of the regression parameters. 
-However, this is not the case when non-normally distributed variables are used.
-This is not the case for the non-linear optimisation because the variables have not been transformed and are therefore still normally distributed. 
+For normally distributed variables, both OLS and WLS will produce unbiased estimates of the regression parameters. 
+However, this is not the case when non-normally distributed variables are used. 
+By applying OLS or WLS to non-normally distributed variables we are applying the wrong statistical model to our analysis. 
+The correct statistical model is being applied in the non-linear optimisation case because the variables have not been transformed and are therefore still normally distributed. 
 
 % Linearization is bad, we should replace it with training in non-linear optimisation. 
-The biased estimates that the linearization process produces means that it has no place in formal analysis. 
+The biased estimates that the linearization process produces mean that linearization has no place in formal analysis. 
 Yet, due in part to the complexity of the more robust non-linear optimisation, linearization is still taught regularly to chemistry students. 
 In a classroom or exam hall, it is feasible for a student, equipped with graph paper and a ruler to estimate the gradient and intercept of a straight line. 
 Additionally, linearization has value where quantitative analysis is not required. 
-However, by failing to cover the problems with linearization, we fail to adequately provide students with the skills required to robustly analyse simple chemical data. 
+However, by failing to cover the problems with linearization, we fail to adequately provide students with the skills to robustly analyse even simple chemical data. 
 
 Recent developments in computing and access to programming with tools, such as the Jupyter Notebook~\cite{kluyver_jupyter_2016} or even the Solver functionality in Microsoft Excel, mean that non-linear optimisation is more accessible than ever. 
 Therefore, I believe that the deficiencies of linearization should be taught alongside the non-linear optimisation solution. 
@@ -134,8 +137,8 @@ Electronic Supplementary Information (ESI) available: A complete set of analysis
 
 \section*{Acknowledgements}
 
-The author thanks Benjamin J. Morgan, Samuel W. Coles, Fiona Dickinson, Thomas Holm Rod, Gabriel Krenzer, and Kasper Tolborg for the insightful discussion that lead to this work. 
-Additionally, the author would like to thank those that engaged in discussion on Twitter, in particular Carl Poree, when the problem of linearization in Arrhenius modelling was initially raised. 
+The author thanks Benjamin J. Morgan, Samuel W. Coles, Thomas Holm Rod, Gabriel Krenzer, and Kasper Tolborg for the insightful discussion that led to this work. 
+Additionally, the author would like to thank those that engaged in discussion on Twitter, in particular Carl Poree and Fiona Dickinson, when the problem of linearization in Arrhenius modelling was initially raised. 
 
 \bibliography{bib}
 
