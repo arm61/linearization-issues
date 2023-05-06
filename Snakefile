@@ -20,10 +20,8 @@ rule wls:
         'src/scripts/_fig_params.py'
     output:
         'src/tex/figures/wls.pdf',
-        'src/tex/output/lin_err_true.txt',
-        'src/tex/output/lin_err.txt',
-        'src/tex/output/non_err_true.txt',
-        'src/tex/output/non_err.txt'
+        'src/tex/output/lin_mean_wls.txt',
+        'src/tex/output/non_mean_wls.txt'
     conda:
         'environment.yml'
     shell:

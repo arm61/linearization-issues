@@ -41,10 +41,8 @@ dependencies:
     - src/tex/output/non_mean_ols.txt
     - src/tex/output/lin_ci_ols.txt
     - src/tex/output/non_ci_ols.txt
-    - src/tex/output/lin_err_true.txt
-    - src/tex/output/lin_err.txt
-    - src/tex/output/non_err_true.txt
-    - src/tex/output/non_err.txt
+    - src/tex/output/lin_mean_wls.txt
+    - src/tex/output/non_mean_wls.txt
 
 # Name of the `.tex` manuscript and corresponding `.pdf` article
 ms_name: ms
