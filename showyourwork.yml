@@ -37,10 +37,10 @@ dependencies:
   # src/scripts/my_script.py:
   #   - src/data/dataset_for_my_script.dat
   src/tex/ms.tex:
-    - src/tex/output/lin_mean.txt
-    - src/tex/output/non_mean.txt
-    - src/tex/output/lin_ci.txt
-    - src/tex/output/non_ci.txt
+    - src/tex/output/lin_mean_ols.txt
+    - src/tex/output/non_mean_ols.txt
+    - src/tex/output/lin_ci_ols.txt
+    - src/tex/output/non_ci_ols.txt
 
 # Name of the `.tex` manuscript and corresponding `.pdf` article
 ms_name: ms
