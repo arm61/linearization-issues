@@ -86,6 +86,9 @@ It was previously noted by Perrin~\cite{perrin_linear_2017} that the linearisati
 In the above example, uncertainty in the non-linear model should be propagated by dividing each by the nominal value, producing heteroscedastic uncertainties. 
 Therefore, the use of OLS for the linearized data is insufficient, instead we should accurately propagate the measured uncertainty in our measurement, i.e. $\mathrm{d}y = \mathrm{d}x / x$, and perform weighted least squares (WLS). 
 This leads to significant improvement in the distribution of $\hat{k}$, with an unbiased normal distribution for both the weighted non-linear optimization and WLS approaches (Figs.~\ref{fig:wls}c \&~\ref{fig:wls}d).
+This 
+
+
 However, this reveals a different problem, from each analysis, we can estimated the uncertainty in $\hat{k}$, and using WLS we significantly overestimate this. 
 The true uncertainty, the width of the solid distribution, using WLS is found to be \variable{output/lin_err_true.txt}, however the mean estimated uncertainty was \variable{output/lin_err.txt}. 
 We compare this with the result from the non-linear approach, where the true uncertainty is smaller than the WLS approach (i.e., more precise) with a value of \variable{output/non_err_true.txt} and the mean estimated value was \variable{output/non_err.txt}.
