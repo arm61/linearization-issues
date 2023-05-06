@@ -80,7 +80,8 @@ This means that, on average, the linearized approach will overestimate the value
 
 Through the use of OLS or non-weighted optimisation we are assuming that the uncertainties in our data are all the same, i.e., they are homoscedastic. 
 It was noted by Perrin~\cite{perrin_linear_2017}, however, that homoscedastic uncertainties may become heteroscedastic as a result of the linearization process (note the error bars in Fig.~\ref{fig:wls}b). 
-Therefore, the use of OLS for linearized data is insufficient, instead we should accurately propagate the measured uncertainty, for the example in Eqn.~\ref{eqn:log} the propagated error is the measured error divided by the nominal value (Fig.~\ref{fig:wls}b), and used weighted least squares (WLS).
+Therefore, the use of OLS for linearized data is insufficient, instead we should accurately propagate the measured uncertainty, for the example in Eqn.~\ref{eqn:log} the propagated error is the measured error divided by the nominal value (Fig.~\ref{fig:wls}b), and use weighted least squares (WLS).
+
 
 It was previously noted by Perrin~\cite{perrin_linear_2017} that the linearisation process will produce uncertainty that is not the same for all values. 
 In the above example, uncertainty in the non-linear model should be propagated by dividing each by the nominal value, producing heteroscedastic uncertainties. 
