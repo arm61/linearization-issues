@@ -82,8 +82,8 @@ Through the use of OLS or unweighted optimisation, we are assuming that the unce
 It was noted by Perrin~\cite{perrin_linear_2017}, however, these homoscedastic uncertainties may become heteroscedastic as a result of the linearization process (note the error bars in Fig.~\ref{fig:wls}b). 
 Therefore, the use of OLS for linearized data is insufficient, instead, for typical heteroscedastic data weighted least squares (WLS) should be used, where the weighted are the correctly propagated measured uncertainty. 
 For the example in Eqn.~\ref{eqn:log}, the correct error propagation is to divide the measured error divided by the nominal value (Fig.~\ref{fig:wls}b).
-This approach leads to a normally distributed, but still biased distribution of estimated $k$ (Fig.~\ref{fig:wls}d), with a normalised mean of \variable{output/lin_mean_wls.txt}.
-We can see that this is not the case for the non-linear optimisation with a normalised mean of \variable{output/non_mean_wls.txt}.
+This approach leads to a normally distributed, but still biased distribution of estimated $k$ (Fig.~\ref{fig:wls}d) (a normalised mean of \variable{output/lin_mean_wls.txt}).
+Non-linear optimisation still produces an unbiased estimate. 
 Even when the errors are correctly propagated and included in the analysis by WLS, on average, the linearization approach will lead to an underestimate of $k$.
 %
 \begin{figure}
