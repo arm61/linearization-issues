@@ -1,27 +1,26 @@
 # Is there still a place for linearization in the chemistry curriculum?
 
 <p align="justify">
-The use of mathematical transformations to reduce non-linear functions to linear problems that can be tackled with analytical linear regression is commonplace in chemistry textbooks and degree programs. 
-However, the linearisation procedure can lead to biased estimates of regression parameters, when real measured data is used. 
-Only introducing students to linearization, without discussion of the shortcomings, leads to researchers applying this biased process in formal analysis.
-Modern computing technology means that non-linear optimization is more accessible than ever. 
-I hope to start a discussion in the community as to the place of linearization, and more broadly the adequacy of the current training in data handling skills we offer to students.
+The use of mathematical transformations to reduce non-linear functions to linear problems, which can be tackled with analytical linear regression, is commonplace in the chemistry curriculum. 
+The linearization procedure, however, assumes an incorrect statistical model for real experimental data; leading to biased estimates of regression parameters. 
+As, non-linear optimization is more accessible than ever with modern computing by introducing linearization, without a detailed discussion of the shortcomings, we are failing to equip students with the correct tools for formal data analysis. 
+I hope that this commentary will start a discussion in the community around the place of linearization in the chemistry curriculum. 
 </p>
 
 ---
 
 <p align="center">
-<a href="https://github.com/arm61/against-linearisation/actions/workflows/build.yml">
-<img src="https://github.com/arm61/against-linearisation/actions/workflows/build.yml/badge.svg" alt="Article status"/>
+<a href="https://github.com/arm61/linearization-issues/actions/workflows/build.yml">
+<img src="https://github.com/arm61/linearization-issues/actions/workflows/build.yml/badge.svg" alt="Article status"/>
 </a>
-<a href="https://github.com/arm61/against-linearisation/raw/main-pdf/arxiv.tar.gz">
+<a href="https://github.com/arm61/linearization-issues/raw/main-pdf/arxiv.tar.gz">
 <img src="https://img.shields.io/badge/article-tarball-blue.svg?style=flat" alt="Article tarball"/>
 </a>
-<a href="https://github.com/arm61/against-linearisation/raw/main-pdf/ms.pdf">
+<a href="https://github.com/arm61/linearization-issues/raw/main-pdf/ms.pdf">
 <img src="https://img.shields.io/badge/article-pdf-blue.svg?style=flat" alt="Read the article"/>
 </a>
-<a href="https://doi.org/10.5281/zenodo.xxxxxxx">
-<img src="https://zenodo.org/badge/DOI/10.5281/zenodo.xxxxxxx.svg"/>
+<a href="https://doi.org/10.5281/zenodo.7949905">
+<img src="https://zenodo.org/badge/DOI/10.5281/zenodo.7949905.svg"/>
 </a>
 <a href="https://arxiv.org/abs/xxxx.xxxxx">
 <img src="https://img.shields.io/badge/ChemRxiv-xxxx.xxxxx-orange.svg"/>
@@ -37,29 +36,31 @@ This is the electronic supplementary information (ESI) associated with the publi
 This ESI uses [`showyourwork`](https://show-your.work) to provide a completely reproducible and automated analysis, plotting, and paper generation workflow. 
 To run the workflow and generate the paper locally using the cached data run the following: 
 ```
-git clone git@github.com:arm61/against-linearisation.git
-cd against-linearisation
+git clone git@github.com:arm61/linearization-issues.git
+cd linearization-issues
 pip install showyourwork
 showyourwork build 
 ```
-Full details of the workflow can be determined from the [`Snakefile`](https://github.com/arm61/against-linearisation/blob/main/Snakefile) and the [`showyourwork.yml`](https://github.com/arm61/against-linearisation/blob/main/showyourwork.yml).
+Full details of the workflow can be determined from the [`Snakefile`](https://github.com/arm61/linearization-issues/blob/main/Snakefile) and the [`showyourwork.yml`](https://github.com/arm61/linearization-issues/blob/main/showyourwork.yml).
 
 ## Contents
 
 Shown below is a documented directory structure for this repository. 
-For those interested in the Jupyter Notebook that shows the general approach to non-linear optimisation, this can be found at [`src/scripts/weighted-non-linear.ipynb`](https://github.com/arm61/against-linearisation/blob/main/src/scripts/weighted-non-linear.ipynb).
+For those interested in the Jupyter Notebook that shows the general approach to non-linear optimisation, this can be found at [`src/scripts/weighted-non-linear.ipynb`](https://github.com/arm61/linearization-issues/blob/main/src/scripts/weighted-non-linear.ipynb).
 
 ```
 ├── .github/workflows                  # Workflows for builidng the manuscript on Github
 ├── src
 │   ├── scripts
 │   │   ├── .gitignore
+│   │   ├── LICENCE
 │   │   ├── _fig_params.py             # Custom figure formatting
-│   │   ├── distributions.py           # Script to produce Figure 2
-│   │   ├── fit_first.py               # Script to produce Figure 1
+│   │   ├── distributions.py           # Script to produce Figure 3
 │   │   ├── matplotlibrc
+│   │   ├── ols.py                     # Script to produce Figure 1
 │   │   ├── paths.py                   # Helper file to control paths
 │   │   └── weighted-non-linear.ipynb  # Jupyter Notebook showing weighted non-linear optimization
+│   │   ├── wls.py                     # Script to produce Figure 2
 │   └── tex
 │   │   ├── figures                    # Figure pdfs are placed here when compiled
 │   │   ├── outputs                    # TeX snippets are placed here when compiled
