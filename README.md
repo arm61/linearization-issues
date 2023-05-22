@@ -22,8 +22,8 @@ I hope that this commentary will start a discussion in the community around the 
 <a href="https://doi.org/10.5281/zenodo.7949905">
 <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.7949905.svg"/>
 </a>
-<a href="https://arxiv.org/abs/xxxx.xxxxx">
-<img src="https://img.shields.io/badge/ChemRxiv-xxxx.xxxxx-orange.svg"/>
+<a href="https://doi.org/10.26434/chemrxiv-2023-44b29">
+<img src="https://img.shields.io/badge/ChemRxiv-10.26434/chemrxiv-2023-44b29-orange.svg"/>
 </a>
 <br><br>
 <a href="https://orcid.org/0000-0003-3381-5911">Andrew R. McCluskey</a>&ast;<br>
