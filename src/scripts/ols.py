@@ -57,7 +57,7 @@ titles.append("a")
 axes[-1].plot(t, At[:, 0], marker='.', color=fp.colors[2])
 axes[-1].set_ylabel('$[\mathrm{H_2O_2}]_t$ / molm$^{-3}$')
 axes[-1].set_xlabel('$t$ / s')
-# axes[-1].set_xticks([0, 5, 10])
+axes[-1].set_yticks([0, 3, 6])
 axes[-1].set_xlim(0, None)
 axes[-1].set_ylim(0, None)
 axes[-1].set_title('Non-linear form')
@@ -68,7 +68,7 @@ axes[-1].plot(t / 100, At[:, 0], marker='.', color=fp.colors[0])
 axes[-1].set_ylabel('$[\mathrm{H_2O_2}]_t$ / molm$^{-3}$')
 axes[-1].set_xlabel('$t$ / s')
 axes[-1].set_yscale('log')
-# axes[-1].set_xticks([0, 5, 10])
+axes[-1].set_yticks([1, 10])
 axes[-1].set_xlim(0, None)
 axes[-1].set_title('Linearised form')
 
@@ -79,8 +79,6 @@ axes[-1].stairs(y, x, color=fp.colors[2], alpha=0.5, fill=True)
 axes[-1].axvline((k_non / k).mean(), color=fp.colors[2])
 axes[-1].set_xlabel('$\hat{k}_{\mathrm{non}} k^{-1}$')
 axes[-1].set_ylabel('$p(\hat{k}_{\mathrm{non}} k^{-1})$')
-# axes[-1].set_xticks([0.9, 1, 1.1])
-# axes[-1].set_yticks([0, 4, 8])
 
 axes.append(fig.add_subplot(gs[1, 1]))
 titles.append("d")
@@ -89,7 +87,6 @@ axes[-1].stairs(y, x, color=fp.colors[0], alpha=0.5, fill=True)
 axes[-1].axvline((k_lin / k).mean(), color=fp.colors[0])
 axes[-1].set_xlabel('$\hat{k}_{\mathrm{lin}} k^{-1}$')
 axes[-1].set_ylabel('$p(\hat{k}_{\mathrm{lin}} k^{-1})$')
-# axes[-1].set_xticks([1, 2, 3, 4])
 
 f = open(paths.output / 'lin_mean_ols.txt', 'w')
 f.write(r'\num{' + f'{np.mean(k_lin / k):.2f}' + r'}')
@@ -109,13 +106,12 @@ f.close()
 
 fig.align_ylabels(axes)
 
-x_correction = [15, 15, 15, 15]
+x_correction = [20, 20, 20, 20]
 for i, ax in enumerate(axes):
     x = ax.get_window_extent().x0 - x_correction[i]
     y = ax.get_window_extent().y1 + 10
     x, y = fig.transFigure.inverted().transform([x, y])
-    fig.text(x, y, titles[i], ha='left', fontweight='bold')
+    fig.text(x, y, titles[i], ha='left')
 
-# plt.figlegend(loc='upper center', bbox_to_anchor=(0.5, -0.01), ncol=3)
 plt.savefig(paths.figures / "ols.pdf")
 plt.close()
