@@ -25,7 +25,7 @@ axes[-1].stairs(y * 1e2, x, color=fp.colors[2], alpha=0.5, fill=True)
 axes[-1].set_xlabel('$y$')
 axes[-1].set_ylabel('$P(y)$ / $10^{-2}$')
 axes[-1].set_title('Normal')
-# axes[-1].set_xticks([0.8, 1, 1.2])
+axes[-1].set_yticks([0, 2, 4])
 
 axes.append(fig.add_subplot(gs[0, 1]))
 titles.append("b")
@@ -34,7 +34,7 @@ axes[-1].stairs(y * 1e-1, x * 1e2, color=fp.colors[0], alpha=0.5, fill=True)
 axes[-1].set_xlabel('$y^{-1}$ / $10^{-2}$')
 axes[-1].set_ylabel('$P(y^{-1})$ / $10^{1}$')
 axes[-1].set_title('Reciprocal')
-# axes[-1].set_xticks([1, 2, 3, 4])
+axes[-1].set_yticks([0, 5, 10])
 
 axes.append(fig.add_subplot(gs[0, 2]))
 titles.append("c")
@@ -43,17 +43,16 @@ axes[-1].stairs(y, x, color=fp.colors[1], alpha=0.5, fill=True)
 axes[-1].set_xlabel('$\ln{(y)}$')
 axes[-1].set_ylabel('$P[\ln{(y)}]$')
 axes[-1].set_title('Logarithm')
-# axes[-1].set_xticks([1, 2, 3, 4])
+axes[-1].set_yticks([0, 1, 2])
 
 fig.align_ylabels(axes)
 
-x_correction = [15, 15, 15, 15]
+x_correction = [20, 20, 20]
 for i, ax in enumerate(axes):
     x = ax.get_window_extent().x0 - x_correction[i]
     y = ax.get_window_extent().y1 + 10
     x, y = fig.transFigure.inverted().transform([x, y])
-    fig.text(x, y, titles[i], ha='left', fontweight='bold')
+    fig.text(x, y, titles[i], ha='left')
 
-# plt.figlegend(loc='upper center', bbox_to_anchor=(0.5, -0.01), ncol=3)
 plt.savefig(paths.figures / "distributions.pdf")
 plt.close()
