@@ -47,7 +47,7 @@ axes[-1].set_yticks([0, 1, 2])
 
 fig.align_ylabels(axes)
 
-x_correction = [22, 28, 19]
+x_correction = [21, 26, 20]
 for i, ax in enumerate(axes):
     x = ax.get_window_extent().x0 - x_correction[i]
     y = ax.get_window_extent().y1 + 10
