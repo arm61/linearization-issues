@@ -79,11 +79,10 @@ The linearized approach will, on average, overestimate the value of $k$ and any 
 
 By using OLS or unweighted non-linear optimisation, we are assuming that the uncertainties in our data are all the same, i.e., they are homoscedastic. 
 It was noted by Perrin~\cite{perrin_linear_2017}, however, these homoscedastic uncertainties may become heteroscedastic as a result of the linearization process (note the error bars in Figure~\ref{fig:wls}b). 
-Therefore, the use of OLS for linearized data is insufficient, instead weighted least squares (WLS), where the weights are the correctly propagated measured uncertainty, should be used.
+Therefore, the use of OLS for linearized data is insufficient, instead weighted least squares (WLS), where the weights determined by Gaussian error propagation, should be used.
 For the example in Equation~\ref{eqn:log}, the correct error propagation is to divide the measured error by the nominal value (Figure~\ref{fig:wls}b).
 WLS leads to a normal distribution of estimated $k$, but still, the distribution is biased (Figure~\ref{fig:wls}d), with a normalised mean of \variable{output/lin_mean_wls.txt}.
 Non-linear optimisation, meanwhile, still produces an unbiased estimate.
-Even when the errors are correctly propagated and included in the analysis, the linearization approach will give a biased estimate of $k$.
 %
 \begin{figure}
   \includegraphics[width=0.5\columnwidth]{figures/wls.pdf}
@@ -101,6 +100,7 @@ The observed bias can be understood by recognising that the measurement of any v
 The shape of this distribution depends on the noise or uncertainty in the measurement. 
 It is commonly assumed that random uncertainty sources will lead to a normal distribution, $p(y) \sim \mathcal{N}(\mu, \sigma^2)$, which is defined by the mean, $\mu$, and standard deviation, $\sigma$ (Figure~\ref{fig:distributions})~\cite{monk_math_2010}.
 When linearization is used, a mathematical transformation is performed on the dependent variable and if that transformation scales in a non-linear fashion, i.e., the reciprocal or logarithm is taken, it will cause the normally distributed variable to become non-normal (Figs.~\ref{fig:distributions}b \&~\ref{fig:distributions}c).
+Similarly, the use of Gaussian error propagation, in the WLS case, also breaks down with linearization, as Gaussian error propagation involves the application of a truncated Taylor expansion, in this case, to a non-linear function leading to a large truncation error.
 %
 \begin{figure}
   \includegraphics[width=0.66 \columnwidth]{figures/distributions.pdf}
@@ -119,21 +119,11 @@ However, this is not the case when non-normally distributed variables are used.
 By applying OLS or WLS to non-normally distributed variables, we use the wrong statistical model for our analysis. 
 However, the correct statistical model is being applied in the non-linear optimisation case, where the variables have not been transformed and are therefore still normally distributed. 
 
-% Linearization is bad, we should replace it with training in non-linear optimisation. 
-The linearization process has no place in formal analysis given its failure to produce unbiased parameter estimates. 
-Yet, due in part to the complexity of the more robust non-linear optimisation, linearization is still taught regularly to chemistry students. 
-As, in a classroom or exam hall, it is feasible for a student, equipped with graph paper and a ruler to estimate the gradient and intercept of a straight line or perform some qualitative analysis.
-However, by failing to show the problems with linearization, we fail to adequately provide students with the skills to evaluate the robustness of chemical data analysis. 
-
 % Introduce that we should be teaching more maths/stats
-This author believes that, while there is some role for linearization as a data visualisation tool, i.e. the doubling of a reaction rate may be more obvious on a linearized plot, it should not be taught as a tool for the analysis of data. 
-Instead, students should be given a more complete education in the mathematical underpinnings of data analysis, including statistical distributions and non-linear optimization, such that they can use modern software tools, such as Python programming, to perform non-linear optimization. 
-The importance of this component of their chemical education is similar to that of traditional mathematical concepts, such as calculus, which underpin theoretical aspects of the chemical sciences.
-Without facilitating this part a students' education, we are failing to equip them to approach modern problems that they will find in the chemical sciences. 
-
-Recent developments in computing and access to programming and tools, such as the Jupyter Notebook~\cite{kluyver_jupyter_2016} or the Solver functionality in Microsoft Excel, mean that non-linear optimisation is more accessible than ever. 
-Therefore, I believe that the deficiencies of linearization should be taught alongside the non-linear optimisation solution. 
-In addition to reducing the use of this flawed process in the chemical research literature, this will give students a more rounded understanding of data analysis, while keeping the utility of ``quick'' analyses with linearization.
+This author believes that, while there is some role for linearization as a data visualization tool, i.e. the doubling of a reaction rate may be more obvious on a linearized plot, or as a qualitative classroom exercise, it should not be taught as a tool for the analysis of data. 
+Instead, students should be given a more complete training in the mathematical and statistical underpinnings of data analysis, such that they can take advantage of modern software tools, such as Python programming, to perform non-linear optimization. 
+The importance of ``data-skills'' in a chemical education should be similar to that of traditional mathematical concepts, such as calculus, which underpin theoretical aspects of the chemical sciences.
+Without facilitating this component of a student's education, we are failing to equip them to approach modern problems that they will find in the chemical sciences. 
 
 \section*{Data availability}
 
