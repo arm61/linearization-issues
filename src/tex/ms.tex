@@ -22,8 +22,8 @@
 \begin{abstract}
     The use of mathematical transformations to reduce non-linear functions to linear problems, which can be tackled with analytical linear regression, is commonplace in the chemistry curriculum. 
     The linearization procedure, however, assumes an incorrect statistical model for real experimental data; leading to biased estimates of regression parameters and should therefore not be used in formal data analysis. 
-    Currently, many chemistry degree programs fail to equip students with the mathematical skills required to appreciate this.
-    I hope that this commentary will start a discussion in the community around the place of linearization in the chemistry curriculum, and more broadly around the mathematical training provided to chemistry students. 
+    Currently, many chemistry degree programs either do not equip students with the mathematical skills required to appreciate this or equip them after it is too late.
+    I hope that this commentary will start a discussion in the community around the place of linearization in the chemistry curriculum, and more broadly around the mathematical and statistical training provided to chemistry students. 
 \end{abstract}
 
 \maketitle 
@@ -32,14 +32,14 @@
 In chemistry, non-linear relationships are commonly found between dependent and independent variables.
 These relationships can be simplified by the process of ``linearization'', where some mathematical transformation is used to reduce the non-linear problem to a linear one. 
 By linearizing a function, analytical linear regression can be used to quantify parameters of interest, rather than relying on numerical optimisation. 
-We see this process in chemistry textbooks~\cite{monk_math_2010,atkins_physical_2018} and undergraduate degree programs: for example where it is applied to first- and second-order rate equations, and the Clausius-Clapeyron and Arrhenius equations~\cite{perrin_linear_2017,harper_data_2017,monk_math_2010}.
+We see this process in chemistry textbooks~\cite{monk_math_2010,atkins_physical_2018} and undergraduate degree programs: for example where it is applied to first- and second-order rate equations, and the Clausius-Clapeyron and Arrhenius equations~\cite{perrin_linear_2017,monk_math_2010}.
 
 % Linearization appears in research literature cause it is taught in degree programmes. 
 While mathematically sound for noise-free measurements, linearization can introduce errors in the analysis process for real experimental data. 
-Specifically, it can lead to biased estimates of regression parameters; the gradient and intercept of the straight line.
-Therefore in formal analysis, the use of linearization should be avoided. 
-The inclusion of linearization in a general chemistry education, is a result of a vicious cycle, where linearization is regularly found in research publications (which inform education) and the problem of linearization are not discussed (so students go on to use it in formal data analysis). 
-This is compounded by the fact that the typical chemistry undergraduate program fails to adequately train students in mathematical and statistical concepts required to appreciate problems associated with linearization or the details of non-linear optimization, which lacks these problems. 
+Specifically, it can lead to biased estimates of regression parameters; the gradient and intercept of the straight line -- as has been noted in this Journal and others~\cite{delevie_when_1986,rusling_minimizing_1988,zielinski_least_1997,denton_analysis_2000,levent_dont_2004,rittenhouse_chapter_2005,perrin_linear_2017,moeglich_open_2018,alamillo_mechanistic_2022}.
+Therefore in formal analysis, where the accurate and precise values of the parameters of interest is desired, the use of linearization should be avoided. 
+Despite this, linearization is still included in a general chemistry education, resulting in a vicious cycle; linearization is taught to students as it appears in the research literature and is then used in the research literature as the practitioners are not aware of the problems. 
+The problems of linearization are rarely discussed when introduced as at this stage, students have not been introduced to the mathematical or statistical background required to appreciate them or the details of the preferred non-linear optimization.
 
 % Example of linearization to show problem -- background.
 To exemplify the problem that results from linearization, we can consider the decomposition of hydrogen peroxide \ce{H2O2} in the presence of excess cerium(III) ion, which follows first-order rate kinetics with the form~\cite{monk_math_2010}
@@ -124,6 +124,12 @@ The linearization process has no place in formal analysis given its failure to p
 Yet, due in part to the complexity of the more robust non-linear optimisation, linearization is still taught regularly to chemistry students. 
 As, in a classroom or exam hall, it is feasible for a student, equipped with graph paper and a ruler to estimate the gradient and intercept of a straight line or perform some qualitative analysis.
 However, by failing to show the problems with linearization, we fail to adequately provide students with the skills to evaluate the robustness of chemical data analysis. 
+
+% Introduce that we should be teaching more maths/stats
+This author believes that, while there is some role for linearization as a data visualisation tool, i.e. the doubling of a reaction rate may be more obvious on a linearized plot, it should not be taught as a tool for the analysis of data. 
+Instead, students should be given a more complete education in the mathematical underpinnings of data analysis, including statistical distributions and non-linear optimization, such that they can use modern software tools, such as Python programming, to perform non-linear optimization. 
+The importance of this component of their chemical education is similar to that of traditional mathematical concepts, such as calculus, which underpin theoretical aspects of the chemical sciences.
+Without facilitating this part a students' education, we are failing to equip them to approach modern problems that they will find in the chemical sciences. 
 
 Recent developments in computing and access to programming and tools, such as the Jupyter Notebook~\cite{kluyver_jupyter_2016} or the Solver functionality in Microsoft Excel, mean that non-linear optimisation is more accessible than ever. 
 Therefore, I believe that the deficiencies of linearization should be taught alongside the non-linear optimisation solution. 
