@@ -75,7 +75,7 @@ axes[-1].errorbar(t / 100, At[:, 0], scale, marker='.', color=fp.colors[0])
 axes[-1].set_ylabel('$[\mathrm{H_2O_2}]_t$ / molm$^{-3}$')
 axes[-1].set_xlabel('$t$ / s')
 axes[-1].set_yscale('log')
-axes[-1].set_yticks([0.1, 1, 10])
+axes[-1].set_yticks([1, 10])
 axes[-1].set_xlim(0, None)
 axes[-1].set_title('Linearised form')
 
