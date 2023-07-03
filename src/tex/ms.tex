@@ -39,7 +39,7 @@ While mathematically sound for noise-free measurements, linearization can introd
 Specifically, it can lead to biased estimates of regression parameters; the gradient and intercept of the straight line.
 Therefore in formal analysis, the use of linearization should be avoided. 
 The inclusion of linearization in a general chemistry education, is a result of a vicious cycle, where linearization is regularly found in research publications (which inform education) and the problem of linearization are not discussed (so students go on to use it in formal data analysis). 
-Although not analytically tractable, non-linear optimisation is now accessible through standard analysis software and programming languages and lacks the problems of linearization. 
+This is compounded by the fact that the typical chemistry undergraduate program fails to adequately train students in mathematical and statistical concepts required to appreciate problems associated with linearization or the details of non-linear optimization, which lacks these problems. 
 
 % Example of linearization to show problem -- background.
 To exemplify the problem that results from linearization, we can consider the decomposition of hydrogen peroxide \ce{H2O2} in the presence of excess cerium(III) ion, which follows first-order rate kinetics with the form~\cite{monk_math_2010}
@@ -49,18 +49,18 @@ To exemplify the problem that results from linearization, we can consider the de
     \label{eqn:first}
 \end{equation}
 %
-where, $[\ce{H2O2}]_t$ is the concentration of hydrogen peroxide at time $t$, $[\ce{H2O2}]_0$ is the initial concentration and $k$ is the rate constant (representative data is shown in Fig.~\ref{fig:ols}a).
-Linearization of Eqn.~\ref{eqn:first} involves taking the natural logarithm of both sides to produce
+where, $[\ce{H2O2}]_t$ is the concentration of hydrogen peroxide at time $t$, $[\ce{H2O2}]_0$ is the initial concentration and $k$ is the rate constant (representative data is shown in Figure~\ref{fig:ols}a).
+Linearization of Equation~\ref{eqn:first} involves taking the natural logarithm of both sides to produce
 %
 \begin{equation}
     \ln{[\ce{H2O2}]_t} = -kt + \ln{[\ce{H2O2}]_0}.
     \label{eqn:log}
 \end{equation}
 %
-The gradient and intercept from linear regression, of $\ln{[\ce{H2O2}]_t}$ on $t$, are therefore equal to $-k$ and $\ln{[\ce{H2O2}]_0}$, respectively (Fig.~\ref{fig:ols}b).
+The gradient and intercept from linear regression, of $\ln{[\ce{H2O2}]_t}$ on $t$, are therefore equal to $-k$ and $\ln{[\ce{H2O2}]_0}$, respectively (Figure~\ref{fig:ols}b).
 
 % Example of linearization to show problem -- result.
-If we were to perform repeated measurements of the concentration of \ce{H2O2} as a function of reaction time and analyse each repeat, we can build up a distribution of estimates of $k$ (Fig.~\ref{fig:ols}c \&~\ref{fig:ols}d). 
+If we were to perform repeated measurements of the concentration of \ce{H2O2} as a function of reaction time and analyse each repeat, we can build up a distribution of estimates of $k$ (Figure~\ref{fig:ols}c \&~\ref{fig:ols}d). 
 The simplest way to analyse a linearized function is by ordinary least squares (OLS) linear regression, which we can compare with unweighted non-linear optimization. 
 Non-linear fitting gives a normal distribution of estimated values of $k$, with a mean centred on the true value, i.e. the estimation is unbiased. 
 The linearized form, however, gives a biased, broad, asymmetrical distribution, where the normalised mean is \variable{output/lin_mean_ols.txt}.
@@ -78,17 +78,17 @@ The linearized approach will, on average, overestimate the value of $k$ and any 
 %
 
 By using OLS or unweighted non-linear optimisation, we are assuming that the uncertainties in our data are all the same, i.e., they are homoscedastic. 
-It was noted by Perrin~\cite{perrin_linear_2017}, however, these homoscedastic uncertainties may become heteroscedastic as a result of the linearization process (note the error bars in Fig.~\ref{fig:wls}b). 
+It was noted by Perrin~\cite{perrin_linear_2017}, however, these homoscedastic uncertainties may become heteroscedastic as a result of the linearization process (note the error bars in Figure~\ref{fig:wls}b). 
 Therefore, the use of OLS for linearized data is insufficient, instead weighted least squares (WLS), where the weights are the correctly propagated measured uncertainty, should be used.
-For the example in Eqn.~\ref{eqn:log}, the correct error propagation is to divide the measured error by the nominal value (Fig.~\ref{fig:wls}b).
-WLS leads to a normal distribution of estimated $k$, but still, the distribution is biased (Fig.~\ref{fig:wls}d), with a normalised mean of \variable{output/lin_mean_wls.txt}.
+For the example in Equation~\ref{eqn:log}, the correct error propagation is to divide the measured error by the nominal value (Figure~\ref{fig:wls}b).
+WLS leads to a normal distribution of estimated $k$, but still, the distribution is biased (Figure~\ref{fig:wls}d), with a normalised mean of \variable{output/lin_mean_wls.txt}.
 Non-linear optimisation, meanwhile, still produces an unbiased estimate.
 Even when the errors are correctly propagated and included in the analysis, the linearization approach will give a biased estimate of $k$.
 %
 \begin{figure}
   \includegraphics[width=0.5\columnwidth]{figures/wls.pdf}
   \caption{
-    The same representative data as Fig.~\ref{fig:ols} with error bars of \SI{0.3}{{\mol\m^{-3}}} (a \& b).
+    The same representative data as Figure~\ref{fig:ols} with error bars of \SI{0.3}{{\mol\m^{-3}}} (a \& b).
     The same number of analyses were performed, however, this time using (c) weighted non-linear optimisation and (d) weighted least squares with propagated uncertainties, the vertical lines indicate the mean of the distribution. 
     }
   \label{fig:wls}
@@ -99,7 +99,7 @@ Even when the errors are correctly propagated and included in the analysis, the 
 % Linearization involves the transformation of a normal distribution to something non-normal.
 The observed bias can be understood by recognising that the measurement of any variable, $y$, is only ever an estimate of the true value, $\hat{y}$, which is a random draw from a distribution of values, $p(y)$. 
 The shape of this distribution depends on the noise or uncertainty in the measurement. 
-It is commonly assumed that random uncertainty sources will lead to a normal distribution, $p(y) \sim \mathcal{N}(\mu, \sigma^2)$, which is defined by the mean, $\mu$, and standard deviation, $\sigma$ (Fig.~\ref{fig:distributions})~\cite{monk_math_2010}.
+It is commonly assumed that random uncertainty sources will lead to a normal distribution, $p(y) \sim \mathcal{N}(\mu, \sigma^2)$, which is defined by the mean, $\mu$, and standard deviation, $\sigma$ (Figure~\ref{fig:distributions})~\cite{monk_math_2010}.
 When linearization is used, a mathematical transformation is performed on the dependent variable and if that transformation scales in a non-linear fashion, i.e., the reciprocal or logarithm is taken, it will cause the normally distributed variable to become non-normal (Figs.~\ref{fig:distributions}b \&~\ref{fig:distributions}c).
 %
 \begin{figure}
