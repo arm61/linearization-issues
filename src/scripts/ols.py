@@ -106,7 +106,7 @@ f.close()
 
 fig.align_ylabels(axes)
 
-x_correction = [20, 32, 20, 32]
+x_correction = [20, 31, 20, 31]
 for i, ax in enumerate(axes):
     x = ax.get_window_extent().x0 - x_correction[i]
     y = ax.get_window_extent().y1 + 10
