@@ -14,4 +14,6 @@ src/tex/figures/*
 __pycache__
 *.synctex.gz
 cover-letter*
+reply*
+diff
 **/.DS_store
