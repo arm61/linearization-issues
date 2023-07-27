@@ -2,9 +2,9 @@
 
 <p align="justify">
 The use of mathematical transformations to reduce non-linear functions to linear problems, which can be tackled with analytical linear regression, is commonplace in the chemistry curriculum. 
-The linearization procedure, however, assumes an incorrect statistical model for real experimental data; leading to biased estimates of regression parameters. 
-As, non-linear optimization is more accessible than ever with modern computing by introducing linearization, without a detailed discussion of the shortcomings, we are failing to equip students with the correct tools for formal data analysis. 
-I hope that this commentary will start a discussion in the community around the place of linearization in the chemistry curriculum. 
+The linearization procedure, however, assumes an incorrect statistical model for real experimental data; leading to biased estimates of regression parameters and should therefore not be used in formal data analysis. 
+This fact is overlooked in many chemistry degrees, students do not yet have the mathematical knowledge to appreciate why linearization leads to bias when it is introduced.
+I hope that this commentary will start a discussion around the place of linearization in the chemistry curriculum, and more broadly around how mathematical and statistical training is currently provided to chemistry students. 
 </p>
 
 ---
