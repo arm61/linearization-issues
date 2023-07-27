@@ -20,8 +20,8 @@
 \begin{abstract}
     The use of mathematical transformations to reduce non-linear functions to linear problems, which can be tackled with analytical linear regression, is commonplace in the chemistry curriculum. 
     The linearization procedure, however, assumes an incorrect statistical model for real experimental data; leading to biased estimates of regression parameters and should therefore not be used in formal data analysis. 
-    This fact is overlooked in many chemistry degrees, as when linearization is introduced, students do not yet have the mathematical knowledge to appreciate why linearization leads to bias.
-    I hope that this commentary will start a discussion in the community around the place of linearization in the chemistry curriculum, and more broadly around how mathematical and statistical training is currently provided to chemistry students. 
+    This fact is overlooked in many chemistry degrees, students do not yet have the mathematical knowledge to appreciate why linearization leads to bias when it is introduced.
+    I hope that this commentary will start a discussion around the place of linearization in the chemistry curriculum, and more broadly around how mathematical and statistical training is currently provided to chemistry students. 
 \end{abstract}
 
 \noindent\textbf{Keywords}: linearization, maths for chemists, data skills, statistics, mathematics.
@@ -37,11 +37,11 @@ While mathematically sound for noise-free measurements, linearization can introd
 Specifically, it can lead to biased estimates of regression parameters; the gradient and intercept of the straight line -- as has been noted in this Journal and others~\cite{delevie_when_1986,rusling_minimizing_1988,zielinski_least_1997,denton_analysis_2000,levent_dont_2004,rittenhouse_chapter_2005,perrin_linear_2017,moeglich_open_2018,alamillo_mechanistic_2022}.
 Therefore in formal analysis, where accurate and precise estimates of the parameters of interest are desired, the use of linearization should be avoided. 
 Despite this, linearization is still included in a general chemistry education, without discussion of the problems caused by it, resulting in a vicious cycle; linearization is taught to students as it appears in the research literature and is then used in the research literature as the practitioners are not aware of the problems. 
-The problems of linearization are rarely discussed when introduced, as at this stage students have not been introduced to the mathematical or statistical concepts required to appreciate the sources of the problems or the details of the preferred non-linear optimization.
-This author believes that instead of introducing linearization as a data analysis tool, students should receive a more complete training in the relevant data analysis skills and linearization should be kept as a basic visualisation tool.
+The problems of linearization are rarely discussed when introduced, as at this stage students are not familiar with the mathematical or statistical concepts required to appreciate what causes the problems and unlike other ``convenient truths'' (e.g. the Rutherford model for the atom), linearization is typically not revisited at a later stage in the chemical education. 
+This author believes that instead of introducing linearization as a data analysis tool, students should receive a more complete training in the relevant data analysis skills, and linearization should be kept for basic visualisation of data.
 
 Although it has been covered by others, it is valuable to restate the problem that results from linearization.
-For this we can consider the decomposition of hydrogen peroxide \ce{H2O2} in the presence of excess cerium(III) ion, which follows first-order rate kinetics with the form~\cite{monk_math_2010}
+For this we can consider the decomposition of hydrogen peroxide, \ce{H2O2}, in the presence of excess cerium(III) ion, which follows first-order rate kinetics with the form~\cite{monk_math_2010}
 %
 \begin{equation}
     [\ce{H2O2}]_t = [\ce{H2O2}]_0\exp{(-kt)},
@@ -62,7 +62,7 @@ If we were to perform repeated measurements of the concentration of \ce{H2O2} as
 The simplest way to analyse a linearized function is by ordinary least squares (OLS) linear regression, which we can compare with unweighted non-linear optimization. 
 Non-linear fitting gives a normal distribution of estimated values of $k$, with a mean centred on the true value, i.e. the estimation is unbiased. 
 The linearized form, however, gives a biased, broad, asymmetrical distribution, where the normalised mean is \variable{output/lin_mean_ols.txt}.
-The linearized approach will, on average, overestimate the value of $k$ and any single estimate of $k$ has a higher chance of being further from the true value. 
+The linearized approach will, on average, overestimate the value of $k$ and any single estimate of $k$ has a higher probability of being further from the true value. 
 %
 \begin{figure}
   \includegraphics[width=0.5\columnwidth]{figures/ols.pdf}
@@ -97,7 +97,7 @@ The observed bias can be understood by recognising that the measurement of any v
 The shape of this distribution depends on the noise or uncertainty in the measurement. 
 It is commonly assumed that random uncertainty sources will lead to a normal distribution, $p(y) \sim \mathcal{N}(\mu, \sigma^2)$, which is defined by the mean, $\mu$, and standard deviation, $\sigma$ (Figure~\ref{fig:distributions})~\cite{monk_math_2010}.
 When linearization is used, a mathematical transformation is performed on the dependent variable and if that transformation scales in a non-linear fashion, i.e., the reciprocal or logarithm is taken, it will cause the normally distributed variable to become non-normal (Figures~\ref{fig:distributions}b \&~\ref{fig:distributions}c).
-Similarly, the use of Gaussian error propagation, in the WLS case, also breaks down with linearization, as Gaussian error propagation involves the application of a truncated Taylor expansion, in this case, to a non-linear function leading to a large truncation error.
+Similarly, the use of Gaussian error propagation also breaks down with linearization, as Gaussian error propagation involves the application of a truncated Taylor expansion, in this case, to a non-linear function leading to a large truncation error.
 %
 \begin{figure}
   \includegraphics[width=0.66 \columnwidth]{figures/distributions.pdf}
@@ -115,7 +115,7 @@ However, this is not the case when non-normally distributed variables are used.
 By applying OLS or WLS to non-normally distributed variables, we use the wrong statistical model for our analysis. 
 However, the correct statistical model is being applied in the non-linear optimisation case, where the variables have not been transformed and are therefore still normally distributed. 
 
-While there is some role for linearization as a data visualization tool, e.g., the doubling of a reaction rate may be more obvious on a linearized plot, or as a qualitative classroom exercise, it should not be taught as a tool for the analysis of data. 
+While there is a role for linearization as a data visualization tool, e.g., the doubling of a reaction rate may be more obvious on a linearized plot, or as a qualitative classroom exercise, it should not be taught as a tool for the formal analysis of data. 
 In addition to improving the mathematical accuracy of analysis performed by students, this will help to break down the vicious cycle that results in potentially erroneous results appearing in the research literature.
 Furthermore, there are additional learning outcomes in showing students that the way that data is represented graphically may skew their interpretation.
 Specifically, this can be achieved by comparing the linearized and non-linear optimized solutions on the linearized and non-linear plots. 
@@ -124,8 +124,8 @@ This author hopes that this commentary will both remind readers of the problems 
 In my experience (which admittedly has been focused on the United Kingdom), students are rarely introduced to much statistical methodology, beyond the basics of summary statistics and Gaussian error propagation, before they are tasked with data analysis problems, e.g., students are asked to produce ``lines of best fit'' without being introduced to ordinary least squares.
 Therefore, to ensure that students appreciate why linearization is problematic, among many other benefits, they should be given a more complete training in the mathematical and statistical underpinnings of data analysis before linearization is introduced.
 
-The importance of ``data skills'' in a chemical education is underestimated and should be considered similar to that of traditional mathematical concepts, such as calculus, which underpin theoretical aspects of the chemical sciences.
-Data skills, including handling, analysis and basic programming skills, make chemists more capable in future research projects, more employable both inside and outside of the chemical industry, and can aid in the understanding of complex subjects~\cite{srnec_python_2017,chng_building_2020,dicksonkarn_implementation_2021,cumby_course_2023}.
+The importance of ``data skills'' in a chemical education is underestimated and should be considered similar to that of traditional mathematical concepts, such as calculus, which underpin many theoretical aspects of the chemical sciences.
+Data skills, including data handling and analysis, and basic programming skills, make chemists more capable in future research projects, more employable both inside and outside of the chemical industry, and can aid in the understanding of complex subjects~\cite{srnec_python_2017,chng_building_2020,dicksonkarn_implementation_2021,cumby_course_2023}.
 Without facilitating this component of a chemist's education, we are failing to equip them to approach modern problems that they will find in the chemical sciences. 
 
 \section*{Data availability}
