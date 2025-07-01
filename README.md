@@ -23,7 +23,7 @@ I hope that this commentary will start a discussion around the place of lineariz
 <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.7949905.svg"/>
 </a>
 <a href="https://doi.org/10.1021/acs.jchemed.3c00466">
-<img src=https://img.shields.io/badge/publication%20DOI-10.1021/acs.jchemed.3c00466-yellow.svg">
+<img src=https://img.shields.io/badge/publication%20DOI-10.1021/acs.jchemed.3c00466-yellow.svg?style=flat"/>
 </a>
 <a href="https://orcid.org/0000-0003-3381-5911">Andrew R. McCluskey</a>&ast;<br>
 &ast;<a href="mailto:andrew.mccluskey@bristol.ac.uk">andrew.mccluskey@bristol.ac.uk</a>
