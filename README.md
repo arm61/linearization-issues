@@ -22,10 +22,9 @@ I hope that this commentary will start a discussion around the place of lineariz
 <a href="https://doi.org/10.5281/zenodo.7949905">
 <img src="https://zenodo.org/badge/DOI/10.5281/zenodo.7949905.svg"/>
 </a>
-<a href="https://doi.org/10.26434/chemrxiv-2023-44b29">
-<img src="https://img.shields.io/badge/ChemRxiv-10.26434%2Fchemrxiv--2023--44b29-orange.svg"/>
+<a href="https://doi.org/10.1021/acs.jchemed.3c00466">
+<img src=https://img.shields.io/badge/publication%20DOI-10.1021/acs.jchemed.3c00466-yellow.svg">
 </a>
-<br><br>
 <a href="https://orcid.org/0000-0003-3381-5911">Andrew R. McCluskey</a>&ast;<br>
 &ast;<a href="mailto:andrew.mccluskey@bristol.ac.uk">andrew.mccluskey@bristol.ac.uk</a>
 </p>
